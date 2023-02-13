@@ -69,9 +69,8 @@ export function ClientProvider({ children }: ClientProps) {
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhonenumber, setClientPhonenumber] = useState("");
-  const [clientProfilePhoto, setClientProfilePhoto] = useState(
-    "/src/assets/user.png"
-  );
+  const [clientProfilePhoto, setClientProfilePhoto] =
+    useState("..assets/user.png");
   const [searchedClients, setSearchedClients] = useState("");
   const [filterdClients, setFilteredClients] = useState<any>();
   const [clientId, setClientId] = useState(0);
