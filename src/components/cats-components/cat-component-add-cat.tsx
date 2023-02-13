@@ -1,4 +1,6 @@
 import { FileArrowUp, XCircle } from "phosphor-react";
+import { FormEvent, useContext } from "react";
+import { CatContext } from "../../contexts/cat-context";
 
 interface CatComponentAddCatProps {
   addCatComponentState: () => void;
@@ -7,6 +9,38 @@ interface CatComponentAddCatProps {
 export function CatComponentAddCat({
   addCatComponentState,
 }: CatComponentAddCatProps) {
+  const {
+    handleCatName,
+    handleCatBreed,
+    handleCatAge,
+    handleCatOwnerId,
+    handleCatLeftAt,
+    handleCatLeaveAt,
+    handleCatId,
+    handleCats,
+  } = useContext(CatContext);
+
+  function handleName(event: FormEvent<HTMLInputElement>) {
+    handleCatName(event.currentTarget.value);
+  }
+  function handleBreed(event: FormEvent<HTMLInputElement>) {
+    handleCatBreed(event.currentTarget.value);
+  }
+  function handleAge(event: FormEvent<HTMLInputElement>) {
+    handleCatAge(event.currentTarget.value);
+  }
+  function handleOwnerId(event: FormEvent<HTMLInputElement>) {
+    handleCatOwnerId(Number(event.currentTarget.value));
+  }
+  function handleId(event: FormEvent<HTMLInputElement>) {
+    handleCatId(Number(event.currentTarget.value));
+  }
+
+  function creatingCatAction() {
+    handleCats();
+    addCatComponentState();
+  }
+
   return (
     <div className="w-full h-screen absolute bg-black bg-opacity-80 top-0 right-0 flex justify-center items-center py-6">
       <div className="lg:w-6/12 md:w-11/12 sm:w-11/12 w-11/12 lg:h-4/5 md:h-4/5 sm:h-5/6 h-5/6 overflow-auto bg-main bg-opacity-20 rounded-2xl lg:pl-12 md:pl-12 sm:pl-6 pl-6 space-y-8 pb-6">
@@ -29,6 +63,7 @@ export function CatComponentAddCat({
                     name=""
                     id=""
                     placeholder="eg: Jerry"
+                    onChange={handleName}
                   />
                 </div>
               </div>
@@ -41,6 +76,7 @@ export function CatComponentAddCat({
                     name=""
                     id=""
                     placeholder="eg: Angorá"
+                    onChange={handleBreed}
                   />
                 </div>
               </div>
@@ -53,6 +89,20 @@ export function CatComponentAddCat({
                     name=""
                     id=""
                     placeholder="eg: 1.8"
+                    onChange={handleAge}
+                  />
+                </div>
+              </div>
+              <div className="space-y-3">
+                <p className="text-main font-extrabold">Owner Id</p>
+                <div className="lg:w-80 md:w-80 sm:w-40 w-32 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                  <input
+                    className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder="eg: 19283298"
+                    onChange={handleOwnerId}
                   />
                 </div>
               </div>
@@ -63,7 +113,11 @@ export function CatComponentAddCat({
             </div>
           </div>
         </div>
-        <button className="flex items-center justify-center w-40 h-9 text-lg font-bold bg-button rounded-full">
+        <button
+          onClick={creatingCatAction}
+          type="submit"
+          className="flex items-center justify-center w-40 h-9 text-lg font-bold bg-button rounded-full"
+        >
           Create cat
         </button>
       </div>

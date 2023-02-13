@@ -1,4 +1,6 @@
 import { FileArrowUp, XCircle } from "phosphor-react";
+import { FormEvent, useContext, useEffect, useState } from "react";
+import { CatContext } from "../../contexts/cat-context";
 
 interface CatEditComponentProps {
   editCatComponentState: () => void;
@@ -7,6 +9,45 @@ interface CatEditComponentProps {
 export function CatComponentEditCat({
   editCatComponentState,
 }: CatEditComponentProps) {
+  const { handleEditCats, cats, catToBeUpdated } = useContext(CatContext);
+  const [newCatName, setNewCatName] = useState<string>();
+  const [newCatBreed, setNewCatBreed] = useState<string>();
+  const [newCatAge, setNewCatAge] = useState<string>();
+  const [newCatOwnerId, setNewCatOwnerId] = useState<number>();
+  const [newCatProfilePhoto, setNewCatProfilePhoto] = useState<string>();
+  const [catSelected, setCatSelected] = useState<any>();
+
+  function handleNewCatName(event: FormEvent<HTMLInputElement>) {
+    setNewCatName(event?.currentTarget?.value);
+  }
+
+  function handleNewCatBreed(event: FormEvent<HTMLInputElement>) {
+    setNewCatBreed(event?.currentTarget?.value);
+  }
+
+  function handleNewCatAge(event: FormEvent<HTMLInputElement>) {
+    setNewCatAge(event?.currentTarget?.value);
+  }
+
+  function handleNewCatOwnerId(event: FormEvent<HTMLInputElement>) {
+    setNewCatOwnerId(Number(event?.currentTarget?.value));
+  }
+
+  function handleNewCatProfilePhoto(event: FormEvent<HTMLInputElement>) {
+    setNewCatProfilePhoto(event?.currentTarget?.value);
+  }
+
+  useEffect(() => {
+    setCatSelected(
+      cats?.map((catItem) => {
+        if (catItem["catId"] === catToBeUpdated) {
+          return catItem;
+        }
+        return null;
+      })
+    );
+  }, []);
+
   return (
     <div className="w-full h-screen absolute bg-black bg-opacity-80 top-0 right-0 flex justify-center items-center py-6">
       <div className="lg:w-6/12 md:w-11/12 sm:w-11/12 w-11/12 lg:h-max md:h-5/6 sm:h-5/6 h-5/6 overflow-auto bg-main bg-opacity-20 rounded-2xl lg:pl-12 md:pl-12 sm:pl-6 pl-6">
@@ -18,20 +59,38 @@ export function CatComponentEditCat({
           />
         </div>
         <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col lg:items-center space-y-6 lg:space-x-9">
-          <div className="lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-black rounded-xl"></div>
-          <div className="space-y-3">
-            <div className="flex items-center space-x-4">
-              <p className="lg:text-3xl md:text-3xl sm:text-xl text-xl text-main font-black">
-                Jerry
-              </p>
-              <p className="text-sm text-button font-extrabold">10290129</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <p className="text-lg text-main">Felipe Gadelha Lino</p>
-              <p className="text-sm text-button font-extrabold">11309429</p>
-            </div>
-            <p className="text-main">Registerd at may 10, 2022</p>
-          </div>
+          {catSelected?.map((catItem: any) => {
+            return (
+              <>
+                <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-slate-200 rounded-xl">
+                  <img
+                    className="w-8/12 h-8/12"
+                    src={catItem["catProfilePhoto"]}
+                    alt="pet icon"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-4">
+                    <p className="lg:text-3xl md:text-3xl sm:text-xl text-xl text-main font-black">
+                      {catItem["catName"]}
+                    </p>
+                    <p className="text-sm text-button font-extrabold">
+                      {catItem["catId"]}
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <p className="text-lg text-main">
+                      {catItem["catOwnerName"]}
+                    </p>
+                    <p className="text-sm text-button font-extrabold">
+                      {catItem["catOwnerId"]}
+                    </p>
+                  </div>
+                  <p className="text-main">Registerd 2023</p>
+                </div>
+              </>
+            );
+          })}
         </div>
         <div className="space-y-8 py-9">
           <div>
@@ -46,6 +105,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: Jerry"
+                      onChange={handleNewCatName}
                     />
                   </div>
                 </div>
@@ -58,6 +118,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: Angorá"
+                      onChange={handleNewCatBreed}
                     />
                   </div>
                 </div>
@@ -70,6 +131,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: 1.8"
+                      onChange={handleNewCatAge}
                     />
                   </div>
                 </div>
@@ -88,6 +150,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: 10290182"
+                      onChange={handleNewCatOwnerId}
                     />
                   </div>
                 </div>
@@ -95,7 +158,19 @@ export function CatComponentEditCat({
             </div>
           </div>
           <div className="flex justify-end pr-9">
-            <button className="flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full">
+            <button
+              onClick={() => {
+                handleEditCats(
+                  newCatName || "err",
+                  newCatBreed || "err",
+                  newCatAge || "err",
+                  newCatOwnerId || 0,
+                  newCatProfilePhoto || "/src/assets/dog-track.png"
+                );
+                editCatComponentState();
+              }}
+              className="flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full"
+            >
               Edit cat
             </button>
           </div>

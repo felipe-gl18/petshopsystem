@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { ClientContext } from "../contexts/clients-context";
 import { NavigationContext } from "../contexts/nav-context";
 import { CatComponentAddCat } from "./cats-components/cat-component-add-cat";
 import { CatComponentEditCat } from "./cats-components/cat-component-edit-cat";
@@ -12,6 +13,8 @@ export function MainComponent() {
   const { isCatSectionSelected, isClientSectionSelected } =
     useContext(NavigationContext);
 
+  const { handleEditClients } = useContext(ClientContext);
+
   const [editClientComponentSelected, setEditClientComponentSelected] =
     useState(false);
 
@@ -23,7 +26,7 @@ export function MainComponent() {
 
   const [addCatComponentSelcted, setAddCatComponentSelected] = useState(false);
 
-  function EditClientComponentState() {
+  function EditClientComponentState(e: number | undefined) {
     setEditClientComponentSelected(!editClientComponentSelected);
   }
 

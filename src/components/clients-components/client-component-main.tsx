@@ -2,7 +2,7 @@ import { ClientComponentData } from "./client-component-data";
 import { ClientComponentSearchAndAddClient } from "./client.component-search-and-add-client";
 
 interface ClientMainProps {
-  editClientComponentState: () => void;
+  editClientComponentState: (e?: number | undefined) => void;
   addClientComponentState: () => void;
   addCatComponentState: () => void;
 }

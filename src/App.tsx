@@ -17,11 +17,17 @@ import { MainComponent } from "./components/main-component";
 import { ClientComponentAddClient } from "./components/clients-components/client-component-add-client";
 import { CatComponentEditCat } from "./components/cats-components/cat-component-edit-cat";
 import { ClientComponentEditClient } from "./components/clients-components/client-component-edit-client";
+import { ClientProvider } from "./contexts/clients-context";
+import { CatProvider } from "./contexts/cat-context";
 
 function App() {
   return (
     <NavigationProvider>
-      <MainComponent />
+      <ClientProvider>
+        <CatProvider>
+          <MainComponent />
+        </CatProvider>
+      </ClientProvider>
     </NavigationProvider>
   );
 }
