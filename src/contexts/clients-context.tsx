@@ -69,8 +69,9 @@ export function ClientProvider({ children }: ClientProps) {
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhonenumber, setClientPhonenumber] = useState("");
-  const [clientProfilePhoto, setClientProfilePhoto] =
-    useState("..assets/user.png");
+  const [clientProfilePhoto, setClientProfilePhoto] = useState(
+    "/src/assets/user.png"
+  );
   const [searchedClients, setSearchedClients] = useState("");
   const [filterdClients, setFilteredClients] = useState<any>();
   const [clientId, setClientId] = useState(0);
@@ -169,10 +170,10 @@ export function ClientProvider({ children }: ClientProps) {
         if (clientItem["clientId"] === clientToBeUpdated) {
           return {
             ...clientItem,
-            clientName: newClientName,
-            clientEmail: newClientEmail,
-            clientPhonenumber: newClientPhonenumber,
-            clientProfilePhoto: newClientProfilePhoto,
+            clientName: newClientName || "undefined",
+            clientEmail: newClientEmail || "undefined",
+            clientPhonenumber: newClientPhonenumber || "undefined",
+            clientProfilePhoto: newClientProfilePhoto || "undefined",
           };
         }
         return clientItem;

@@ -76,7 +76,7 @@ export function CatProvider({ children }: CatProps) {
   const [catOwnerName, setCatOwnerName] = useState("");
   const [catTreatmentState, setCatTreatmentState] = useState(false);
   const [catProfilePhoto, setCatProfilePhoto] = useState(
-    "../assets/dog-track.png"
+    "/src/assets/dog-track.png"
   );
   const [searchedCats, setSearchedCats] = useState("");
   const [filteredCats, setFilteredCats] = useState<any>();

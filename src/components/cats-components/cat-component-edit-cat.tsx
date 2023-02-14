@@ -39,12 +39,7 @@ export function CatComponentEditCat({
 
   useEffect(() => {
     setCatSelected(
-      cats?.map((catItem) => {
-        if (catItem["catId"] === catToBeUpdated) {
-          return catItem;
-        }
-        return null;
-      })
+      cats?.filter((catItem) => catItem["catId"] === catToBeUpdated)
     );
   }, []);
 

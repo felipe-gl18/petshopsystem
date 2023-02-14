@@ -36,12 +36,7 @@ export function ClientComponentEditClient({
 
   useEffect(() => {
     setclientSelected(
-      clients?.map((clientItem) => {
-        if (clientItem["clientId"] === clientToBeUpdated) {
-          return clientItem;
-        }
-        return null;
-      })
+      clients?.filter((clientItem) => clientItem['clientId'] === clientToBeUpdated)
     );
   }, []);
 
