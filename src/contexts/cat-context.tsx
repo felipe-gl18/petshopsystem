@@ -7,6 +7,8 @@ import {
 } from "react";
 import { ClientContext } from "./clients-context";
 
+import cat from "/src/assets/dog-track.png";
+
 interface CatData {
   cats?: Array<{
     catName: string;
@@ -75,9 +77,7 @@ export function CatProvider({ children }: CatProps) {
   const [catToBeUpdated, setCatToBeUpdated] = useState<number | undefined>(0);
   const [catOwnerName, setCatOwnerName] = useState("");
   const [catTreatmentState, setCatTreatmentState] = useState(false);
-  const [catProfilePhoto, setCatProfilePhoto] = useState(
-    "/src/assets/dog-track.png"
-  );
+  const [catProfilePhoto, setCatProfilePhoto] = useState(cat);
   const [searchedCats, setSearchedCats] = useState("");
   const [filteredCats, setFilteredCats] = useState<any>();
   const [cats, setCats] = useState<

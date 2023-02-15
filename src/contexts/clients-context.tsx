@@ -7,6 +7,8 @@ import {
 } from "react";
 import { CatContext } from "./cat-context";
 
+import clientImage from "/src/assets/user.png";
+
 interface ClientData {
   clients?: Array<{
     clientName: string;
@@ -69,9 +71,7 @@ export function ClientProvider({ children }: ClientProps) {
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhonenumber, setClientPhonenumber] = useState("");
-  const [clientProfilePhoto, setClientProfilePhoto] = useState(
-    "/src/assets/user.png"
-  );
+  const [clientProfilePhoto, setClientProfilePhoto] = useState(clientImage);
   const [searchedClients, setSearchedClients] = useState("");
   const [filterdClients, setFilteredClients] = useState<any>();
   const [clientId, setClientId] = useState(0);
