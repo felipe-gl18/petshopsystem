@@ -14,6 +14,7 @@ export function CatComponentData({ editCatComponentState }: CatMainProps) {
     handleCatTreatmentState,
     handleDeleteCats,
   } = useContext(CatContext);
+
   return (
     <div className="grid lg:grid-cols-2 md:grid-cols-1 min-[490px]:grid-cols-2 min-[320px]:grid-cols-1 grid-cols-2 lg:gap-x-8 gap-y-12 md:gap-y-12 sm:gap-y-12 ml-6 max-[382px]:ml-4 lg:ml-14 md:ml-14 sm:ml-6 mt-16 max-[382px]:mt-9">
       <>
@@ -43,7 +44,7 @@ export function CatComponentData({ editCatComponentState }: CatMainProps) {
                         <Trash
                           size={32}
                           onClick={() => {
-                            handleDeleteCats();
+                            handleDeleteCats(true);
                             handleCatToBeUpdated(data?.catId);
                           }}
                         />

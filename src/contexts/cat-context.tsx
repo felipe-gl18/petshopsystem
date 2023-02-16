@@ -43,7 +43,7 @@ interface CatData {
   handleCatOwnerName: (value: string) => void;
   handleCatTreatmentState: () => void;
   handleSearchedCats: (value: string) => void;
-  handleDeleteCats: () => void;
+  handleDeleteCats: (value: boolean) => void;
 }
 
 interface CatProps {
@@ -64,7 +64,7 @@ export const CatContext = createContext<CatData>({
   handleCatOwnerName(value) {},
   handleCatTreatmentState() {},
   handleSearchedCats(value) {},
-  handleDeleteCats() {},
+  handleDeleteCats(value) {},
 });
 
 export function CatProvider({ children }: CatProps) {
@@ -82,6 +82,9 @@ export function CatProvider({ children }: CatProps) {
   const [catProfilePhoto, setCatProfilePhoto] = useState(cat);
   const [searchedCats, setSearchedCats] = useState("");
   const [filteredCats, setFilteredCats] = useState<any>();
+  const [deleteCatAction, setDeleteCatAction] = useState<boolean | undefined>(
+    false
+  );
   const [cats, setCats] = useState<
     Array<{
       catName: string;
@@ -188,7 +191,8 @@ export function CatProvider({ children }: CatProps) {
     );
   }
 
-  function handleDeleteCats() {
+  function handleDeleteCats(value?: boolean) {
+    setDeleteCatAction(value);
     setCats(cats.filter((catItem) => catItem["catId"] !== catToBeUpdated));
   }
 
@@ -224,6 +228,10 @@ export function CatProvider({ children }: CatProps) {
       })
     );
   }, [catTreatmentState]);
+
+  useEffect(() => {
+    deleteCatAction ? handleDeleteCats() : null;
+  }, [catToBeUpdated]);
 
   useEffect(() => {
     setFilteredCats(

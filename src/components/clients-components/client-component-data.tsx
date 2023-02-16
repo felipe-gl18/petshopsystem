@@ -58,7 +58,7 @@ export function ClientComponentData({
                           size={32}
                           onClick={() => {
                             handleClientToBeUpdated(data?.clientId);
-                            handleDeleteClients();
+                            handleDeleteClients(true);
                           }}
                         />
                       </div>
