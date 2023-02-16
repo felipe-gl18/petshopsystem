@@ -203,8 +203,27 @@ export function ClientProvider({ children }: ClientProps) {
     setCatsBelongedComponentState(!catsBelongedComponentState);
   }
 
+  function saveLocalClients() {
+    localStorage.setItem("clients", JSON.stringify(clients));
+  }
+
+  function getLocalClients() {
+    if (localStorage.getItem("clients") === null) {
+      localStorage.setItem("clients", JSON.stringify(clients));
+    } else {
+      let clientsLocal = JSON.parse(localStorage.getItem("clients")!);
+      setClients(clientsLocal);
+    }
+  }
+
+  useEffect(() => {
+    getLocalClients();
+  }, []);
+
   useEffect(() => {
     setFilteredClients(clients);
+    saveLocalClients();
+    console.log(JSON.stringify(localStorage.getItem("clients")));
   }, [clients]);
 
   useEffect(() => {
