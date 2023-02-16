@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ArrowCircleDown, ArrowCircleRight, Car, Pen } from "phosphor-react";
+import { ArrowCircleDown, ArrowCircleRight, Pen, Trash } from "phosphor-react";
 import { ClientContext } from "../../contexts/clients-context";
 import { CatContext } from "../../contexts/cat-context";
 
@@ -18,6 +18,7 @@ export function ClientComponentData({
     filterdClients,
     handleClientToBeUpdated,
     handleCatsBelongedComponentState,
+    handleDeleteClients,
   } = useContext(ClientContext);
   const { handleCatToBeUpdated, handleCatTreatmentState } =
     useContext(CatContext);
@@ -41,17 +42,26 @@ export function ClientComponentData({
                 </div>
                 <div className="space-y-6 flex flex-col justify-center">
                   <div className="space-y-2">
-                    <div className="text-main font-black flex items-center lg:space-x-20 md:space-x-12 sm:space-x-6 max-[639px]:space-x-4">
+                    <div className="text-main font-black flex items-center lg:space-x-14 md:space-x-12 sm:space-x-6 max-[639px]:space-x-4">
                       <p className="lg:text-2xl md:text-xl sm:text-xl max-[639px]:text-xl">
                         {data["clientName"]}
                       </p>
-                      <Pen
-                        size={32}
-                        onClick={() => {
-                          editClientComponentState();
-                          handleClientToBeUpdated(data?.clientId);
-                        }}
-                      />
+                      <div className="flex space-x-4">
+                        <Pen
+                          size={32}
+                          onClick={() => {
+                            editClientComponentState();
+                            handleClientToBeUpdated(data?.clientId);
+                          }}
+                        />
+                        <Trash
+                          size={32}
+                          onClick={() => {
+                            handleClientToBeUpdated(data?.clientId);
+                            handleDeleteClients();
+                          }}
+                        />
+                      </div>
                     </div>
                     <p className="text-main">{data["clientEmail"]}</p>
                     <p className="text-main">{data["clientPhonenumber"]}</p>

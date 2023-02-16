@@ -43,6 +43,7 @@ interface CatData {
   handleCatOwnerName: (value: string) => void;
   handleCatTreatmentState: () => void;
   handleSearchedCats: (value: string) => void;
+  handleDeleteCats: () => void;
 }
 
 interface CatProps {
@@ -63,6 +64,7 @@ export const CatContext = createContext<CatData>({
   handleCatOwnerName(value) {},
   handleCatTreatmentState() {},
   handleSearchedCats(value) {},
+  handleDeleteCats() {},
 });
 
 export function CatProvider({ children }: CatProps) {
@@ -186,6 +188,10 @@ export function CatProvider({ children }: CatProps) {
     );
   }
 
+  function handleDeleteCats() {
+    setCats(cats.filter((catItem) => catItem["catId"] !== catToBeUpdated));
+  }
+
   function handleCatTreatmentState() {
     setCatTreatmentState(!catTreatmentState);
   }
@@ -250,6 +256,7 @@ export function CatProvider({ children }: CatProps) {
         handleCatOwnerName,
         handleSearchedCats,
         filteredCats,
+        handleDeleteCats,
       }}
     >
       {children}

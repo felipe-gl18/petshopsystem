@@ -36,7 +36,9 @@ export function ClientComponentEditClient({
 
   useEffect(() => {
     setclientSelected(
-      clients?.filter((clientItem) => clientItem['clientId'] === clientToBeUpdated)
+      clients?.filter(
+        (clientItem) => clientItem["clientId"] === clientToBeUpdated
+      )
     );
   }, []);
 
@@ -57,7 +59,7 @@ export function ClientComponentEditClient({
                 <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-slate-200 rounded-xl">
                   <img
                     className="w-10/12 h-10/12"
-                    src="/src/assets/user.png"
+                    src={clientItem["clientProfilePhoto"]}
                     alt="pet icon"
                   />
                 </div>

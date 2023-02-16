@@ -48,6 +48,7 @@ interface ClientData {
   handleCatsBelongedComponentState: () => void;
   handleClientProfilePhoto: (value: string) => void;
   handleSearchedClients: (value: string) => void;
+  handleDeleteClients: () => void;
 }
 interface ClientProps {
   children: ReactNode;
@@ -65,6 +66,7 @@ export const ClientContext = createContext<ClientData>({
   handleCatsBelongedComponentState() {},
   handleClientProfilePhoto(value) {},
   handleSearchedClients(value) {},
+  handleDeleteClients() {},
 });
 
 export function ClientProvider({ children }: ClientProps) {
@@ -181,6 +183,14 @@ export function ClientProvider({ children }: ClientProps) {
     );
   }
 
+  function handleDeleteClients() {
+    setClients(
+      clients.filter(
+        (clientItem) => clientItem["clientId"] !== clientToBeUpdated
+      )
+    );
+  }
+
   function handleCatsBelongedToClient(value: any) {
     setClients(value);
   }
@@ -236,6 +246,7 @@ export function ClientProvider({ children }: ClientProps) {
         handleClientProfilePhoto,
         handleSearchedClients,
         filterdClients,
+        handleDeleteClients,
       }}
     >
       {children}

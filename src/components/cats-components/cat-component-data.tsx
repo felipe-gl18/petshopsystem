@@ -1,4 +1,4 @@
-import { Pen } from "phosphor-react";
+import { Pen, Trash } from "phosphor-react";
 import { useContext } from "react";
 import { CatContext } from "../../contexts/cat-context";
 
@@ -7,8 +7,13 @@ interface CatMainProps {
 }
 
 export function CatComponentData({ editCatComponentState }: CatMainProps) {
-  const { cats, filteredCats, handleCatToBeUpdated, handleCatTreatmentState } =
-    useContext(CatContext);
+  const {
+    cats,
+    filteredCats,
+    handleCatToBeUpdated,
+    handleCatTreatmentState,
+    handleDeleteCats,
+  } = useContext(CatContext);
   return (
     <div className="grid lg:grid-cols-2 md:grid-cols-1 min-[490px]:grid-cols-2 min-[320px]:grid-cols-1 grid-cols-2 lg:gap-x-8 gap-y-12 md:gap-y-12 sm:gap-y-12 ml-6 max-[382px]:ml-4 lg:ml-14 md:ml-14 sm:ml-6 mt-16 max-[382px]:mt-9">
       <>
@@ -27,13 +32,22 @@ export function CatComponentData({ editCatComponentState }: CatMainProps) {
                   <div className="space-y-2">
                     <div className="text-main text-3xl lg:text-xl md:text-3xl sm:text-3xl font-black flex items-center space-x-20">
                       <p>{data["catName"]}</p>
-                      <Pen
-                        size={32}
-                        onClick={() => {
-                          editCatComponentState();
-                          handleCatToBeUpdated(data?.catId);
-                        }}
-                      />
+                      <div className="flex space-x-4">
+                        <Pen
+                          size={32}
+                          onClick={() => {
+                            editCatComponentState();
+                            handleCatToBeUpdated(data?.catId);
+                          }}
+                        />
+                        <Trash
+                          size={32}
+                          onClick={() => {
+                            handleDeleteCats();
+                            handleCatToBeUpdated(data?.catId);
+                          }}
+                        />
+                      </div>
                     </div>
                     <p className="text-main">{data["catOwnerName"]}</p>
                     <p className="text-main lg:flex md:flex sm:flex hidden">
