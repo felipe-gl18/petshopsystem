@@ -8,7 +8,6 @@ interface CatMainProps {
 
 export function CatComponentData({ editCatComponentState }: CatMainProps) {
   const {
-    cats,
     filteredCats,
     handleCatToBeUpdated,
     handleCatTreatmentState,
@@ -52,13 +51,10 @@ export function CatComponentData({ editCatComponentState }: CatMainProps) {
                     </div>
                     <p className="text-main">{data["catOwnerName"]}</p>
                     <p className="text-main lg:flex md:flex sm:flex hidden">
-                      Left at {String(data["catLeftAt"].getHours())}h and{" "}
-                      {String(data["catLeftAt"].getMinutes())} min
+                      err
                     </p>
                     <p className="text-white lg:flex md:flex sm:flex hidden">
-                      Leave at {String(new Date(data["catLeaveAt"]).getHours())}{" "}
-                      h and {String(new Date(data["catLeaveAt"]).getMinutes())}{" "}
-                      min
+                      err
                     </p>
                   </div>
                   <button

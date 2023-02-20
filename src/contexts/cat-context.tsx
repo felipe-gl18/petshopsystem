@@ -98,7 +98,16 @@ export function CatProvider({ children }: CatProps) {
       catTreatmentState: boolean;
       catProfilePhoto: string;
     }>
-  >([]);
+  >(() => {
+    if (localStorage.getItem("cats") === null) {
+      const seila: any = [];
+      localStorage.setItem("cats", JSON.stringify(seila));
+      return seila;
+    } else {
+      let catsLocal = JSON.parse(localStorage.getItem("cats") || "[{}]");
+      return catsLocal;
+    }
+  });
 
   function handleCatName(value: string) {
     setCatName(value);
@@ -200,6 +209,10 @@ export function CatProvider({ children }: CatProps) {
     setCatTreatmentState(!catTreatmentState);
   }
 
+  function saveLocalCats() {
+    localStorage.setItem("cats", JSON.stringify(cats));
+  }
+
   useEffect(() => {
     let clientsWithCats = clients?.map((clientItem) => {
       let catsBelonged = cats.filter(
@@ -211,6 +224,7 @@ export function CatProvider({ children }: CatProps) {
       };
     });
 
+    saveLocalCats();
     handleCatsBelongedToClient(clientsWithCats);
     setFilteredCats(cats);
   }, [cats]);
@@ -242,7 +256,6 @@ export function CatProvider({ children }: CatProps) {
           .includes(searchedCats.toLowerCase());
       })
     );
-    console.log(filteredCats);
   }, [searchedCats]);
 
   return (

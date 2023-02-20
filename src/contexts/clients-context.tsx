@@ -99,6 +99,7 @@ export function ClientProvider({ children }: ClientProps) {
   const [clientToBeUpdated, setClientToBeUpdated] = useState<
     number | undefined
   >(0);
+  const [test, setTest] = useState<any>();
   const [clients, setClients] = useState<
     Array<{
       clientName: string;
@@ -120,7 +121,16 @@ export function ClientProvider({ children }: ClientProps) {
       }>;
       clientProfilePhoto: string;
     }>
-  >([]);
+  >(() => {
+    if (localStorage.getItem("clients") === null) {
+      const seila: any = [];
+      localStorage.setItem("clients", JSON.stringify(seila));
+      return seila;
+    } else {
+      let clientsLocal = JSON.parse(localStorage.getItem("clients") || "[{}]");
+      return clientsLocal;
+    }
+  });
 
   function handleClientName(value: string) {
     setClientName(value);
@@ -207,23 +217,9 @@ export function ClientProvider({ children }: ClientProps) {
     localStorage.setItem("clients", JSON.stringify(clients));
   }
 
-  function getLocalClients() {
-    if (localStorage.getItem("clients") === null) {
-      localStorage.setItem("clients", JSON.stringify(clients));
-    } else {
-      let clientsLocal = JSON.parse(localStorage.getItem("clients")!);
-      setClients(clientsLocal);
-    }
-  }
-
   useEffect(() => {
-    getLocalClients();
-  }, []);
-
-  useEffect(() => {
-    setFilteredClients(clients);
     saveLocalClients();
-    console.log(JSON.stringify(localStorage.getItem("clients")));
+    setFilteredClients(clients);
   }, [clients]);
 
   useEffect(() => {
@@ -253,7 +249,6 @@ export function ClientProvider({ children }: ClientProps) {
           .includes(searchedClients.toLowerCase());
       })
     );
-    console.log(filterdClients);
   }, [searchedClients]);
 
   return (

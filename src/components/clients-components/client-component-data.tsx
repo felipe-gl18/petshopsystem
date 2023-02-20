@@ -107,22 +107,8 @@ export function ClientComponentData({
                               <p className="lg:text-2xl md:text-xl sm:text-xl max-[639px]:text-xl text-main font-black">
                                 {catItem["catName"]}
                               </p>
-                              <p className="text-main">
-                                Left at{" "}
-                                {String(catItem["catLeftAt"].getHours())}h and{" "}
-                                {String(catItem["catLeftAt"].getMinutes())} min
-                              </p>
-                              <p className="text-white">
-                                Leave at{" "}
-                                {String(
-                                  new Date(catItem["catLeaveAt"]).getHours()
-                                )}{" "}
-                                h and{" "}
-                                {String(
-                                  new Date(catItem["catLeaveAt"]).getMinutes()
-                                )}{" "}
-                                min
-                              </p>
+                              <p className="text-main">err</p>
+                              <p className="text-white">err</p>
                             </div>
                             <button
                               onClick={() => {
