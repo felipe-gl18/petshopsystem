@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { CatContext } from "./cat-context";
+import { PetContext } from "./pet-context";
 
 import clientImage from "/src/assets/user.png";
 
@@ -15,18 +15,18 @@ interface ClientData {
     clientEmail: string;
     clientPhonenumber: string;
     clientId: number | undefined;
-    catsState: boolean;
-    cats?: Array<{
-      catName: string;
-      catBreed: string;
-      catAge: number;
-      catOwnerId: number;
-      catOwnerName: string;
-      catLeftAt: Date;
-      catLeaveAt: number;
-      catId: number;
-      catTreatmentState: boolean;
-      catProfilePhoto: string;
+    petsState: boolean;
+    pets?: Array<{
+      petName: string;
+      petBreed: string;
+      petAge: number;
+      petOwnerId: number;
+      petOwnerName: string;
+      petLeftAt: Date;
+      petLeaveAt: number;
+      petId: number;
+      petTreatmentState: boolean;
+      petProfilePhoto: string;
     }>;
     clientProfilePhoto: string;
   }>;
@@ -44,8 +44,8 @@ interface ClientData {
   clientToBeUpdated?: number;
   handleClientToBeUpdated: (value: number | undefined) => void;
   handleClients: () => void;
-  handleCatsBelongedToClient: (value: any) => void;
-  handleCatsBelongedComponentState: () => void;
+  handlePetsBelongedToClient: (value: any) => void;
+  handlePetsBelongedComponentState: () => void;
   handleClientProfilePhoto: (value: string) => void;
   handleSearchedClients: (value: string) => void;
   handleDeleteClients: (value?: boolean) => void;
@@ -62,8 +62,8 @@ export const ClientContext = createContext<ClientData>({
   handleEditClients(value?) {},
   handleClientToBeUpdated(value?) {},
   handleClients() {},
-  handleCatsBelongedToClient(value) {},
-  handleCatsBelongedComponentState() {},
+  handlePetsBelongedToClient(value) {},
+  handlePetsBelongedComponentState() {},
   handleClientProfilePhoto(value) {},
   handleSearchedClients(value) {},
   handleDeleteClients(value) {},
@@ -80,20 +80,20 @@ export function ClientProvider({ children }: ClientProps) {
   const [deleteClientAction, setDeleteClientAction] = useState<
     boolean | undefined
   >(false);
-  const [catsBelongedComponentState, setCatsBelongedComponentState] =
+  const [petsBelongedComponentState, setPetsBelongedComponentState] =
     useState<boolean>(false);
-  const [cats, setCats] = useState<
+  const [pets, setPets] = useState<
     Array<{
-      catName: string;
-      catBreed: string;
-      catAge: number;
-      catOwnerId: number;
-      catOwnerName: string;
-      catLeftAt: Date;
-      catLeaveAt: number;
-      catId: number;
-      catTreatmentState: boolean;
-      catProfilePhoto: string;
+      petName: string;
+      petBreed: string;
+      petAge: number;
+      petOwnerId: number;
+      petOwnerName: string;
+      petLeftAt: Date;
+      petLeaveAt: number;
+      petId: number;
+      petTreatmentState: boolean;
+      petProfilePhoto: string;
     }>
   >([]);
   const [clientToBeUpdated, setClientToBeUpdated] = useState<
@@ -106,18 +106,18 @@ export function ClientProvider({ children }: ClientProps) {
       clientEmail: string;
       clientPhonenumber: string;
       clientId: number;
-      catsState: boolean;
-      cats?: Array<{
-        catName: string;
-        catBreed: string;
-        catAge: number;
-        catOwnerId: number;
-        catOwnerName: string;
-        catLeftAt: Date;
-        catLeaveAt: number;
-        catId: number;
-        catTreatmentState: boolean;
-        catProfilePhoto: string;
+      petsState: boolean;
+      pets?: Array<{
+        petName: string;
+        petBreed: string;
+        petAge: number;
+        petOwnerId: number;
+        petOwnerName: string;
+        petLeftAt: Date;
+        petLeaveAt: number;
+        petId: number;
+        petTreatmentState: boolean;
+        petProfilePhoto: string;
       }>;
       clientProfilePhoto: string;
     }>
@@ -167,7 +167,7 @@ export function ClientProvider({ children }: ClientProps) {
         clientName,
         clientEmail,
         clientPhonenumber,
-        catsState: false,
+        petsState: false,
         clientProfilePhoto,
         clientId: Math.round(Math.random() * 1e9),
       },
@@ -205,12 +205,12 @@ export function ClientProvider({ children }: ClientProps) {
     );
   }
 
-  function handleCatsBelongedToClient(value: any) {
+  function handlePetsBelongedToClient(value: any) {
     setClients(value);
   }
 
-  function handleCatsBelongedComponentState() {
-    setCatsBelongedComponentState(!catsBelongedComponentState);
+  function handlePetsBelongedComponentState() {
+    setPetsBelongedComponentState(!petsBelongedComponentState);
   }
 
   function saveLocalClients() {
@@ -228,13 +228,13 @@ export function ClientProvider({ children }: ClientProps) {
         if (clientItem["clientId"] === clientToBeUpdated) {
           return {
             ...clientItem,
-            catsState: catsBelongedComponentState,
+            petsState: petsBelongedComponentState,
           };
         }
         return clientItem;
       })
     );
-  }, [catsBelongedComponentState]);
+  }, [petsBelongedComponentState]);
 
   useEffect(() => {
     deleteClientAction ? handleDeleteClients() : null;
@@ -263,8 +263,8 @@ export function ClientProvider({ children }: ClientProps) {
         handleEditClients,
         handleClientToBeUpdated,
         clientToBeUpdated,
-        handleCatsBelongedToClient,
-        handleCatsBelongedComponentState,
+        handlePetsBelongedToClient,
+        handlePetsBelongedComponentState,
         handleClientProfilePhoto,
         handleSearchedClients,
         filterdClients,

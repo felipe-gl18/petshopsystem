@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useState } from "react";
 
 interface NavData {
-  isCatSectionSelected: boolean;
+  isPetSectionSelected: boolean;
   isClientSectionSelected: boolean;
-  catSectionSelection?: ()=> void;
-  clientSectionSelection?: ()=> void;
+  petSectionSelection?: () => void;
+  clientSectionSelection?: () => void;
 }
 
 interface NavProps {
@@ -12,31 +12,31 @@ interface NavProps {
 }
 
 export const NavigationContext = createContext<NavData>({
-  isCatSectionSelected: true,
+  isPetSectionSelected: true,
   isClientSectionSelected: false,
 });
 
 export function NavigationProvider({ children }: NavProps) {
-  const [isCatSectionSelected, setIsCatSelectionSelected] = useState(true);
+  const [isPetSectionSelected, setIsPetSelectionSelected] = useState(true);
   const [isClientSectionSelected, setIsClientSectionSelected] = useState(false);
 
-  function catSectionSelection() {
+  function petSectionSelection() {
     setIsClientSectionSelected(false);
-    setIsCatSelectionSelected(true);
+    setIsPetSelectionSelected(true);
   }
 
   function clientSectionSelection() {
-    setIsCatSelectionSelected(false);
-    setIsClientSectionSelected(true)
+    setIsPetSelectionSelected(false);
+    setIsClientSectionSelected(true);
   }
 
   return (
     <NavigationContext.Provider
       value={{
-        isCatSectionSelected,
+        isPetSectionSelected,
         isClientSectionSelected,
-        catSectionSelection,
-        clientSectionSelection
+        petSectionSelection,
+        clientSectionSelection,
       }}
     >
       {children}

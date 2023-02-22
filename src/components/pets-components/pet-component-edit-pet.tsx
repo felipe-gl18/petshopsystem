@@ -1,45 +1,45 @@
 import { FileArrowUp, XCircle } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
-import { CatContext } from "../../contexts/cat-context";
+import { PetContext } from "../../contexts/pet-context";
 
-interface CatEditComponentProps {
-  editCatComponentState: () => void;
+interface PetEditComponentProps {
+  editPetComponentState: () => void;
 }
 
-export function CatComponentEditCat({
-  editCatComponentState,
-}: CatEditComponentProps) {
-  const { handleEditCats, cats, catToBeUpdated } = useContext(CatContext);
-  const [newCatName, setNewCatName] = useState<string>();
-  const [newCatBreed, setNewCatBreed] = useState<string>();
-  const [newCatAge, setNewCatAge] = useState<string>();
-  const [newCatOwnerId, setNewCatOwnerId] = useState<number>();
-  const [newCatProfilePhoto, setNewCatProfilePhoto] = useState<string>();
-  const [catSelected, setCatSelected] = useState<any>();
+export function PetComponentEditPet({
+  editPetComponentState,
+}: PetEditComponentProps) {
+  const { handleEditPets, pets, petToBeUpdated } = useContext(PetContext);
+  const [newPetName, setNewPetName] = useState<string>();
+  const [newPetBreed, setNewPetBreed] = useState<string>();
+  const [newPetAge, setNewPetAge] = useState<string>();
+  const [newPetOwnerId, setNewPetOwnerId] = useState<number>();
+  const [newPetProfilePhoto, setNewPetProfilePhoto] = useState<string>();
+  const [petSelected, setPetSelected] = useState<any>();
 
-  function handleNewCatName(event: FormEvent<HTMLInputElement>) {
-    setNewCatName(event?.currentTarget?.value);
+  function handleNewPetName(event: FormEvent<HTMLInputElement>) {
+    setNewPetName(event?.currentTarget?.value);
   }
 
-  function handleNewCatBreed(event: FormEvent<HTMLInputElement>) {
-    setNewCatBreed(event?.currentTarget?.value);
+  function handleNewPetBreed(event: FormEvent<HTMLInputElement>) {
+    setNewPetBreed(event?.currentTarget?.value);
   }
 
-  function handleNewCatAge(event: FormEvent<HTMLInputElement>) {
-    setNewCatAge(event?.currentTarget?.value);
+  function handleNewPetAge(event: FormEvent<HTMLInputElement>) {
+    setNewPetAge(event?.currentTarget?.value);
   }
 
-  function handleNewCatOwnerId(event: FormEvent<HTMLInputElement>) {
-    setNewCatOwnerId(Number(event?.currentTarget?.value));
+  function handleNewPetOwnerId(event: FormEvent<HTMLInputElement>) {
+    setNewPetOwnerId(Number(event?.currentTarget?.value));
   }
 
-  function handleNewCatProfilePhoto(event: FormEvent<HTMLInputElement>) {
-    setNewCatProfilePhoto(event?.currentTarget?.value);
+  function handleNewPetProfilePhoto(event: FormEvent<HTMLInputElement>) {
+    setNewPetProfilePhoto(event?.currentTarget?.value);
   }
 
   useEffect(() => {
-    setCatSelected(
-      cats?.filter((catItem) => catItem["catId"] === catToBeUpdated)
+    setPetSelected(
+      pets?.filter((petItem) => petItem["petId"] === petToBeUpdated)
     );
   }, []);
 
@@ -49,36 +49,36 @@ export function CatComponentEditCat({
         <div className="flex justify-end w-full">
           <XCircle
             size={42}
-            onClick={editCatComponentState}
+            onClick={editPetComponentState}
             className="text-button mr-2 mt-2"
           />
         </div>
         <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col lg:items-center space-y-6 lg:space-x-9">
-          {catSelected?.map((catItem: any) => {
+          {petSelected?.map((petItem: any) => {
             return (
               <>
                 <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-slate-200 rounded-xl">
                   <img
                     className="w-8/12 h-8/12"
-                    src={catItem["catProfilePhoto"]}
+                    src={petItem["petProfilePhoto"]}
                     alt="pet icon"
                   />
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-4">
                     <p className="lg:text-3xl md:text-3xl sm:text-xl text-xl text-main font-black">
-                      {catItem["catName"]}
+                      {petItem["petName"]}
                     </p>
                     <p className="text-sm text-button font-extrabold">
-                      {catItem["catId"]}
+                      {petItem["petId"]}
                     </p>
                   </div>
                   <div className="flex items-center space-x-4">
                     <p className="text-lg text-main">
-                      {catItem["catOwnerName"]}
+                      {petItem["petOwnerName"]}
                     </p>
                     <p className="text-sm text-button font-extrabold">
-                      {catItem["catOwnerId"]}
+                      {petItem["petOwnerId"]}
                     </p>
                   </div>
                   <p className="text-main">Registerd 2023</p>
@@ -92,7 +92,7 @@ export function CatComponentEditCat({
             <div className="flex lg:space-x-32 md:space-x-32 sm:space-x-7 space-x-7">
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <p className="text-main font-extrabold">Cat name</p>
+                  <p className="text-main font-extrabold">Pet name</p>
                   <div className="w-44 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
                     <input
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
@@ -100,7 +100,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: Jerry"
-                      onChange={handleNewCatName}
+                      onChange={handleNewPetName}
                     />
                   </div>
                 </div>
@@ -113,7 +113,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: Angorá"
-                      onChange={handleNewCatBreed}
+                      onChange={handleNewPetBreed}
                     />
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: 1.8"
-                      onChange={handleNewCatAge}
+                      onChange={handleNewPetAge}
                     />
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export function CatComponentEditCat({
                       name=""
                       id=""
                       placeholder="eg: 10290182"
-                      onChange={handleNewCatOwnerId}
+                      onChange={handleNewPetOwnerId}
                     />
                   </div>
                 </div>
@@ -155,18 +155,18 @@ export function CatComponentEditCat({
           <div className="flex justify-end pr-9">
             <button
               onClick={() => {
-                handleEditCats(
-                  newCatName || "err",
-                  newCatBreed || "err",
-                  newCatAge || "err",
-                  newCatOwnerId || 0,
-                  newCatProfilePhoto || "/src/assets/dog-track.png"
+                handleEditPets(
+                  newPetName || "err",
+                  newPetBreed || "err",
+                  newPetAge || "err",
+                  newPetOwnerId || 0,
+                  newPetProfilePhoto || "/src/assets/dog-track.png"
                 );
-                editCatComponentState();
+                editPetComponentState();
               }}
               className="flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full"
             >
-              Edit cat
+              Edit pet
             </button>
           </div>
         </div>

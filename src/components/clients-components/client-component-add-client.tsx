@@ -1,6 +1,7 @@
 import { FileArrowUp, XCircle } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { ClientContext } from "../../contexts/clients-context";
+import InputMask from "react-input-mask";
 
 interface ClientComponentAddClientProps {
   addClientComponentState: () => void;
@@ -33,13 +34,6 @@ export function ClientComponentAddClient({
   function creatingClientAction() {
     handleClients();
     addClientComponentState();
-  }
-
-  function handleClientImage(value: FormEvent<HTMLInputElement>) {
-    const formData = new FormData();
-    formData.append("userpic", value.currentTarget.value);
-    const result = formData.get("userpic");
-    console.log(result);
   }
 
   return (
@@ -84,24 +78,17 @@ export function ClientComponentAddClient({
               <div className="space-y-3">
                 <p className="text-main font-extrabold">Phonenumber</p>
                 <div className="lg:w-80 md:w-80 sm:w-32 w-32 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
-                  <input
+                  <InputMask
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     type="text"
                     name=""
                     id=""
                     placeholder="eg: (88) 992048450"
                     onChange={handlePhonenumber}
+                    mask={"(99) 99999-9999"}
                   />
                 </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <p className="text-main font-extrabold">Profile photo</p>
-              <input
-                type="file"
-                onClick={handleClientImage}
-                className="w-52 text-main file:py-2 file:px-4 file:font-semibold hover:file:bg-opacity-80 file:text-sm file:rounded-full file:bg-button file:border-0"
-              />
             </div>
           </div>
         </form>

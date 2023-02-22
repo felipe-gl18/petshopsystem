@@ -12,15 +12,15 @@ import {
 import { NavigationProvider } from "./contexts/nav-context";
 import { MainComponent } from "./components/main-component";
 import { ClientProvider } from "./contexts/clients-context";
-import { CatProvider } from "./contexts/cat-context";
+import { PetProvider } from "./contexts/pet-context";
 
 function App() {
   return (
     <NavigationProvider>
       <ClientProvider>
-        <CatProvider>
+        <PetProvider>
           <MainComponent />
-        </CatProvider>
+        </PetProvider>
       </ClientProvider>
     </NavigationProvider>
   );

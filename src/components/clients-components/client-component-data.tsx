@@ -1,27 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { ArrowCircleDown, ArrowCircleRight, Pen, Trash } from "phosphor-react";
 import { ClientContext } from "../../contexts/clients-context";
-import { CatContext } from "../../contexts/cat-context";
+import { PetContext } from "../../contexts/pet-context";
 
 interface SearchAndEditProps {
   editClientComponentState: (e?: number | undefined) => void;
-  addCatComponentState: () => void;
+  addPetComponentState: () => void;
 }
 
 export function ClientComponentData({
   editClientComponentState,
-  addCatComponentState,
+  addPetComponentState,
 }: SearchAndEditProps) {
   const [userSectionSelected, setUserSectionSelected] = useState(false);
   const {
     clients,
     filterdClients,
     handleClientToBeUpdated,
-    handleCatsBelongedComponentState,
+    handlePetsBelongedComponentState,
     handleDeleteClients,
   } = useContext(ClientContext);
-  const { handleCatToBeUpdated, handleCatTreatmentState } =
-    useContext(CatContext);
+  const { handlePetToBeUpdated, handlePetTreatmentState } =
+    useContext(PetContext);
 
   return (
     <div className="grid lg:grid-cols-1 md:grid-cols-1 lg:gap-x-8 gap-y-12 md:gap-y-12 sm:gap-y-12 ml-6 max-[382px]:ml-4 lg:ml-14 md:ml-14 sm:ml-6 mt-16 max-[382px]:mt-9">
@@ -70,54 +70,74 @@ export function ClientComponentData({
                     </p>
                   </div>
                   <button
-                    onClick={addCatComponentState}
+                    onClick={addPetComponentState}
                     className="w-28 text-xs bg-button font-bold rounded-full"
                   >
-                    Add cat
+                    Add pet
                   </button>
                 </div>
               </div>
-              {data["catsState"] ? (
+              {data["petsState"] ? (
                 <>
                   <div
                     onClick={() => {
                       handleClientToBeUpdated(data?.clientId);
-                      handleCatsBelongedComponentState();
+                      handlePetsBelongedComponentState();
                     }}
                     className="flex items-center h-4 space-x-2"
                   >
                     <ArrowCircleDown size={32} className="text-button" />
                     <p className="text-sm text-main font-black opacity-50">
-                      close cats section
+                      close pets section
                     </p>
                   </div>
                   <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-y-6 grid-cols-1">
-                    {data["cats"]?.map((catItem: any) => {
+                    {data["pets"]?.map((petItem: any) => {
                       return (
                         <div className="flex lg:flex-row md:flex-row sm:flex-col flex-col lg:space-x-6 md:space-x-6 lg:space-y-0 md:space-y-0 sm:space-y-6 space-y-6">
                           <div className="flex items-center justify-center w-44 h-44 bg-slate-200 rounded-xl">
                             <img
                               className="w-8/12 h-8/12"
-                              src={catItem["catProfilePhoto"]}
+                              src={petItem["petProfilePhoto"]}
                               alt="pet icon"
                             />
                           </div>
                           <div className="flex flex-col justify-center space-y-6">
                             <div className="space-y-2">
                               <p className="lg:text-2xl md:text-xl sm:text-xl max-[639px]:text-xl text-main font-black">
-                                {catItem["catName"]}
+                                {petItem["petName"]}
                               </p>
-                              <p className="text-main">err</p>
-                              <p className="text-white">err</p>
+                              <p className="text-main">
+                                Left at{" "}
+                                {String(
+                                  new Date(petItem["petLeftAt"]).getHours()
+                                )}
+                                h and{" "}
+                                {String(
+                                  new Date(petItem["petLeftAt"]).getMinutes()
+                                )}
+                                min
+                              </p>
+                              <p className="text-white">
+                                Leave at{" "}
+                                {String(
+                                  new Date(petItem["petLeaveAt"]).getHours()
+                                )}
+                                h and{" "}
+                                {String(
+                                  new Date(petItem["petLeaveAt"]).getMinutes()
+                                )}
+                                min
+                              </p>
                             </div>
                             <button
                               onClick={() => {
-                                handleCatToBeUpdated(catItem["catId"]);
-                                handleCatTreatmentState();
+                                handlePetToBeUpdated(petItem["petId"]);
+                                handlePetTreatmentState();
                               }}
                               className="w-36 text-xs font-bold bg-button rounded-full"
                             >
-                              {catItem["catTreatmentState"]
+                              {petItem["petTreatmentState"]
                                 ? "Treatment executed"
                                 : "Start treatment"}
                             </button>
@@ -131,13 +151,13 @@ export function ClientComponentData({
                 <div
                   onClick={() => {
                     handleClientToBeUpdated(data?.clientId);
-                    handleCatsBelongedComponentState();
+                    handlePetsBelongedComponentState();
                   }}
                   className="flex items-center h-4 space-x-2"
                 >
                   <ArrowCircleRight size={32} className="text-button" />
                   <p className="text-sm text-main font-black opacity-50">
-                    open cats sections
+                    open pets sections
                   </p>
                 </div>
               )}

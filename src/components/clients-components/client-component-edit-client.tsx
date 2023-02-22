@@ -1,6 +1,7 @@
 import { FileArrowUp, XCircle } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { ClientContext } from "../../contexts/clients-context";
+import InputMask from "react-input-mask";
 
 interface ClientEditComponentProps {
   editClientComponentState: (e?: number | undefined) => void;
@@ -114,21 +115,16 @@ export function ClientComponentEditClient({
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Phone number</p>
                   <div className="lg:w-60 md:w-60 sm:w-48 w-48 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
-                    <input
+                    <InputMask
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       type="text"
                       name=""
                       id=""
                       placeholder="eg: (88) 992048450"
                       onChange={handleNewClientPhonenumber}
+                      mask={"(99) 99999-9999"}
                     />
                   </div>
-                </div>
-              </div>
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <p className="text-main font-extrabold">Profile photo</p>
-                  <FileArrowUp size={62} className="text-button" />
                 </div>
               </div>
             </div>
