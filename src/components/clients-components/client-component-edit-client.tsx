@@ -61,7 +61,7 @@ export function ClientComponentEditClient({
                   <img
                     className="w-10/12 h-10/12"
                     src={clientItem["clientProfilePhoto"]}
-                    alt="pet icon"
+                    alt="client icon"
                   />
                 </div>
                 <div className="space-y-3">
@@ -88,7 +88,7 @@ export function ClientComponentEditClient({
               <div className="space-y-6">
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">New name</p>
-                  <div className="lg:w-72 md:w-72 sm:w-44 w-44 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                  <div className="lg:w-72 md:w-72 sm:w-56 w-56 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
                     <input
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       type="text"
@@ -101,7 +101,7 @@ export function ClientComponentEditClient({
                 </div>
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Email</p>
-                  <div className="lg:w-80 md:w-80 sm:w-52 w-52 h-9 flex border-2 border-button items-center pl-6 space-x-4 rounded-md">
+                  <div className="lg:w-80 md:w-80 sm:w-60 w-64 h-9 flex border-2 border-button items-center pl-6 space-x-4 rounded-md">
                     <input
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       type="text"
@@ -114,7 +114,7 @@ export function ClientComponentEditClient({
                 </div>
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Phone number</p>
-                  <div className="lg:w-60 md:w-60 sm:w-48 w-48 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                  <div className="lg:w-60 md:w-60 sm:w-60 w-60 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
                     <InputMask
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       type="text"

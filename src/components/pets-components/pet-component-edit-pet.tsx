@@ -132,10 +132,6 @@ export function PetComponentEditPet({
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="space-y-2">
-                  <p className="text-main font-extrabold">Photo</p>
-                  <FileArrowUp size={62} className="text-button" />
-                </div>
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Owner id</p>
                   <div className="lg:w-36 md:w-36 sm:w-24 w-20 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">

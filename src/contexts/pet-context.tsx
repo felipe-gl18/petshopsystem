@@ -16,8 +16,8 @@ interface petData {
     petAge: string;
     petOwnerId: number;
     petOwnerName: Array<string | undefined> | undefined;
-    petLeftAt: Date;
-    petLeaveAt: number;
+    petLeftAt: Date | string;
+    petLeaveAt: number | string;
     petId: number;
     petTreatmentState: boolean;
     petProfilePhoto: string;
@@ -74,7 +74,7 @@ export function PetProvider({ children }: PetProps) {
   const [petAge, setPetAge] = useState("");
   const [petOwnerId, setPetOwnerId] = useState(0);
   const [petId, setPetId] = useState(0);
-  const [petLeftAt, setPetLeftAt] = useState<Date>();
+  const [petLeftAt, setPetLeftAt] = useState<Date | string>();
   const [petLeaveAt, setPetLeaveAt] = useState(Date.now());
   const [petToBeUpdated, setPetToBeUpdated] = useState<number | undefined>(0);
   const [petOwnerName, setPetOwnerName] = useState("");
@@ -93,8 +93,8 @@ export function PetProvider({ children }: PetProps) {
       petOwnerId: number;
       petOwnerName: Array<string | undefined> | undefined;
       petId: number;
-      petLeftAt: Date;
-      petLeaveAt: number;
+      petLeftAt: Date | string;
+      petLeaveAt: number | string;
       petTreatmentState: boolean;
       petProfilePhoto: string;
     }>
@@ -163,8 +163,10 @@ export function PetProvider({ children }: PetProps) {
         petOwnerId,
         petOwnerName: petOwner,
         petTreatmentState: false,
-        petLeftAt: new Date(),
-        petLeaveAt: new Date().setHours(new Date().getHours() + 1),
+        petLeftAt: petTreatmentState ? new Date() : "entry not checked",
+        petLeaveAt: petTreatmentState
+          ? new Date().setHours(new Date().getHours() + 1)
+          : "entry not checked",
         petId: Math.round(Math.random() * 1e9),
         petProfilePhoto,
       },
@@ -236,6 +238,10 @@ export function PetProvider({ children }: PetProps) {
           return {
             ...petItem,
             petTreatmentState: petTreatmentState,
+            petLeftAt: petTreatmentState ? new Date() : "entry not checked",
+            petLeaveAt: petTreatmentState
+              ? new Date().setHours(new Date().getHours() + 1)
+              : "entry not checked",
           };
         }
         return petItem;

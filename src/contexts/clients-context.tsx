@@ -15,6 +15,7 @@ interface ClientData {
     clientEmail: string;
     clientPhonenumber: string;
     clientId: number | undefined;
+    clientAddress: string;
     petsState: boolean;
     pets?: Array<{
       petName: string;
@@ -22,8 +23,8 @@ interface ClientData {
       petAge: number;
       petOwnerId: number;
       petOwnerName: string;
-      petLeftAt: Date;
-      petLeaveAt: number;
+      petLeftAt: Date | string;
+      petLeaveAt: number | string;
       petId: number;
       petTreatmentState: boolean;
       petProfilePhoto: string;
@@ -35,6 +36,7 @@ interface ClientData {
   handleClientEmail: (value: string) => void;
   handleClientPhonenumber: (value: string) => void;
   handleClientId: (value: number) => void;
+  handleClientAddress: (value: string) => void;
   handleEditClients: (
     newClientName: string,
     newClientEmail: string,
@@ -67,6 +69,7 @@ export const ClientContext = createContext<ClientData>({
   handleClientProfilePhoto(value) {},
   handleSearchedClients(value) {},
   handleDeleteClients(value) {},
+  handleClientAddress(value) {},
 });
 
 export function ClientProvider({ children }: ClientProps) {
@@ -74,6 +77,7 @@ export function ClientProvider({ children }: ClientProps) {
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhonenumber, setClientPhonenumber] = useState("");
   const [clientProfilePhoto, setClientProfilePhoto] = useState(clientImage);
+  const [clientAddress, setClientAddress] = useState("");
   const [searchedClients, setSearchedClients] = useState("");
   const [filterdClients, setFilteredClients] = useState<any>();
   const [clientId, setClientId] = useState(0);
@@ -89,8 +93,8 @@ export function ClientProvider({ children }: ClientProps) {
       petAge: number;
       petOwnerId: number;
       petOwnerName: string;
-      petLeftAt: Date;
-      petLeaveAt: number;
+      petLeftAt: Date | string;
+      petLeaveAt: number | string;
       petId: number;
       petTreatmentState: boolean;
       petProfilePhoto: string;
@@ -106,6 +110,7 @@ export function ClientProvider({ children }: ClientProps) {
       clientEmail: string;
       clientPhonenumber: string;
       clientId: number;
+      clientAddress: string;
       petsState: boolean;
       pets?: Array<{
         petName: string;
@@ -113,8 +118,8 @@ export function ClientProvider({ children }: ClientProps) {
         petAge: number;
         petOwnerId: number;
         petOwnerName: string;
-        petLeftAt: Date;
-        petLeaveAt: number;
+        petLeftAt: Date | string;
+        petLeaveAt: number | string;
         petId: number;
         petTreatmentState: boolean;
         petProfilePhoto: string;
@@ -160,6 +165,10 @@ export function ClientProvider({ children }: ClientProps) {
     setSearchedClients(value);
   }
 
+  function handleClientAddress(value: string) {
+    setClientAddress(value);
+  }
+
   function handleClients() {
     setClients([
       ...clients,
@@ -167,6 +176,7 @@ export function ClientProvider({ children }: ClientProps) {
         clientName,
         clientEmail,
         clientPhonenumber,
+        clientAddress,
         petsState: false,
         clientProfilePhoto,
         clientId: Math.round(Math.random() * 1e9),
@@ -260,6 +270,7 @@ export function ClientProvider({ children }: ClientProps) {
         handleClientEmail,
         handleClientPhonenumber,
         handleClientId,
+        handleClientAddress,
         handleEditClients,
         handleClientToBeUpdated,
         clientToBeUpdated,

@@ -7,6 +7,7 @@ import { PetComponentMain } from "./pets-components/pet-component-main";
 import { ClientComponentAddClient } from "./clients-components/client-component-add-client";
 import { ClientComponentEditClient } from "./clients-components/client-component-edit-client";
 import { ClientComponentMain } from "./clients-components/client-component-main";
+import { ClientComponentCardInfo } from "./clients-components/client-component-card-info";
 import { NavComponent } from "./nav-component";
 
 export function MainComponent() {
@@ -21,6 +22,9 @@ export function MainComponent() {
   const [addClientComponentSelected, setAddClientComponentSelected] =
     useState(false);
 
+  const [cardInfoClientComponentState, setCardInfoClientComponentState] =
+    useState(false);
+
   const [editPetComponentSelected, setEditPetComponentSelectted] =
     useState(false);
 
@@ -32,6 +36,10 @@ export function MainComponent() {
 
   function AddClientComponentState() {
     setAddClientComponentSelected(!addClientComponentSelected);
+  }
+
+  function CardInfoClientComponentState() {
+    setCardInfoClientComponentState(!cardInfoClientComponentState);
   }
 
   function EditPetComponentState() {
@@ -55,6 +63,7 @@ export function MainComponent() {
           <ClientComponentMain
             editClientComponentState={EditClientComponentState}
             addClientComponentState={AddClientComponentState}
+            cardInfoClientComponentState={CardInfoClientComponentState}
             addPetComponentState={AddPetComponentState}
           />
         )}
@@ -67,6 +76,11 @@ export function MainComponent() {
       {addClientComponentSelected ? (
         <ClientComponentAddClient
           addClientComponentState={AddClientComponentState}
+        />
+      ) : null}
+      {cardInfoClientComponentState ? (
+        <ClientComponentCardInfo
+          cardInfoClientComponentState={CardInfoClientComponentState}
         />
       ) : null}
       {editPetComponentSelected ? (

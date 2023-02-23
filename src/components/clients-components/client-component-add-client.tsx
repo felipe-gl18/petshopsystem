@@ -17,6 +17,7 @@ export function ClientComponentAddClient({
     handleClientEmail,
     handleClientPhonenumber,
     handleClientProfilePhoto,
+    handleClientAddress,
   } = useContext(ClientContext);
 
   function handleName(event: FormEvent<HTMLInputElement>) {
@@ -29,6 +30,10 @@ export function ClientComponentAddClient({
 
   function handlePhonenumber(event: FormEvent<HTMLInputElement>) {
     handleClientPhonenumber(event.currentTarget.value);
+  }
+
+  function handleAddress(event: FormEvent<HTMLInputElement>) {
+    handleClientAddress(event.currentTarget.value);
   }
 
   function creatingClientAction() {
@@ -51,7 +56,7 @@ export function ClientComponentAddClient({
             <div className="space-y-6">
               <div className="space-y-3">
                 <p className="text-main font-extrabold">Usename</p>
-                <div className="lg:w-80 md:w-80 sm:w-40 w-40 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                <div className="lg:w-80 md:w-80 sm:w-64 w-52 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
                   <input
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     type="text"
@@ -64,7 +69,7 @@ export function ClientComponentAddClient({
               </div>
               <div className="space-y-3">
                 <p className="text-main font-extrabold">Email</p>
-                <div className="lg:w-80 md:w-80 sm:w-48 w-48 h-9 flex border-2 border-button items-center pl-6 space-x-4 rounded-md">
+                <div className="lg:w-80 md:w-80 sm:w-72 w-60 h-9 flex border-2 border-button items-center pl-6 space-x-4 rounded-md">
                   <input
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     type="text"
@@ -76,8 +81,21 @@ export function ClientComponentAddClient({
                 </div>
               </div>
               <div className="space-y-3">
+                <p className="text-main font-extrabold">Address</p>
+                <div className="lg:w-80 md:w-80 sm:w-64 w-52 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                  <input
+                    className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
+                    type="text"
+                    name=""
+                    id="clientAddress"
+                    placeholder=""
+                    onChange={handleAddress}
+                  />
+                </div>
+              </div>
+              <div className="space-y-3">
                 <p className="text-main font-extrabold">Phonenumber</p>
-                <div className="lg:w-80 md:w-80 sm:w-32 w-32 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                <div className="lg:w-80 md:w-80 sm:w-60 w-56 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
                   <InputMask
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     type="text"
