@@ -76,7 +76,34 @@ export function PetComponentEditPet({
                       {petItem["petOwnerId"]}
                     </p>
                   </div>
-                  <p className="text-main">Registerd 2023</p>
+                  <div>
+                    <p className="text-main lg:flex md:flex sm:flex">
+                      {petItem["petTreatmentState"]
+                        ? "Left at" +
+                          " " +
+                          String(new Date(petItem["petLeftAt"]).getHours()) +
+                          "h" +
+                          " " +
+                          "and" +
+                          " " +
+                          String(new Date(petItem["petLeftAt"]).getMinutes()) +
+                          "min"
+                        : petItem["petLeftAt"]}
+                    </p>
+                    <p className="text-white lg:flex md:flex sm:flex">
+                      {petItem["petTreatmentState"]
+                        ? "Leave at" +
+                          " " +
+                          String(new Date(petItem["petLeaveAt"]).getHours()) +
+                          "h" +
+                          " " +
+                          "and" +
+                          " " +
+                          String(new Date(petItem["petLeaveAt"]).getMinutes()) +
+                          "min"
+                        : petItem["petLeaveAt"]}
+                    </p>
+                  </div>
                 </div>
               </>
             );
