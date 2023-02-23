@@ -50,7 +50,7 @@ export function ClientComponentData({
                       }}
                       className="w-8/12 h-8/12"
                       src={data["clientProfilePhoto"]}
-                      alt="pet icon"
+                      alt="client icon"
                     />
                   </div>
                   <div className="space-y-6 flex flex-col justify-center">

@@ -15,7 +15,6 @@ export function ClientComponentEditClient({
   const [newClientName, setNewClientName] = useState<string>();
   const [newClientEmail, setNewClientEmail] = useState<string>();
   const [newClientPhonenumber, setNewClientPhonenumber] = useState<string>();
-  const [newClientProfilePhoto, setNewClientProfilePhoto] = useState<string>();
   const [clientSelected, setclientSelected] = useState<any>();
 
   function handleNewClientName(event: FormEvent<HTMLInputElement>) {
@@ -29,10 +28,6 @@ export function ClientComponentEditClient({
 
   function handleNewClientPhonenumber(event: FormEvent<HTMLInputElement>) {
     setNewClientPhonenumber(event?.currentTarget?.value);
-  }
-
-  function handleNewClientProfilePhoto(event: FormEvent<HTMLInputElement>) {
-    setNewClientProfilePhoto(newClientProfilePhoto);
   }
 
   useEffect(() => {
@@ -135,8 +130,7 @@ export function ClientComponentEditClient({
                 handleEditClients(
                   newClientName || "undefined",
                   newClientEmail || "undefined",
-                  newClientPhonenumber || "undefined",
-                  newClientProfilePhoto || "/src/assets/user.png"
+                  newClientPhonenumber || "undefined"
                 );
                 editClientComponentState();
               }}

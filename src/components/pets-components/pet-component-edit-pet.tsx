@@ -14,7 +14,6 @@ export function PetComponentEditPet({
   const [newPetBreed, setNewPetBreed] = useState<string>();
   const [newPetAge, setNewPetAge] = useState<string>();
   const [newPetOwnerId, setNewPetOwnerId] = useState<number>();
-  const [newPetProfilePhoto, setNewPetProfilePhoto] = useState<string>();
   const [petSelected, setPetSelected] = useState<any>();
 
   function handleNewPetName(event: FormEvent<HTMLInputElement>) {
@@ -31,10 +30,6 @@ export function PetComponentEditPet({
 
   function handleNewPetOwnerId(event: FormEvent<HTMLInputElement>) {
     setNewPetOwnerId(Number(event?.currentTarget?.value));
-  }
-
-  function handleNewPetProfilePhoto(event: FormEvent<HTMLInputElement>) {
-    setNewPetProfilePhoto(event?.currentTarget?.value);
   }
 
   useEffect(() => {
@@ -155,8 +150,7 @@ export function PetComponentEditPet({
                   newPetName || "err",
                   newPetBreed || "err",
                   newPetAge || "err",
-                  newPetOwnerId || 0,
-                  newPetProfilePhoto || "/src/assets/dog-track.png"
+                  newPetOwnerId || 0
                 );
                 editPetComponentState();
               }}

@@ -35,8 +35,7 @@ interface petData {
     newPetName: string,
     newPetBreed: string,
     newPetAge: string,
-    newPetOwnerId: number,
-    newPetProfilePhoto: string
+    newPetOwnerId: number
   ) => void;
   handlePetToBeUpdated: (value: number | undefined) => void;
   petToBeUpdated?: number;
@@ -140,10 +139,6 @@ export function PetProvider({ children }: PetProps) {
     setPetOwnerName(value);
   }
 
-  function handlePetProfilePhoto(value: string) {
-    setPetProfilePhoto(petProfilePhoto);
-  }
-
   function handleSearchedPets(value: string) {
     setSearchedPets(value);
   }
@@ -182,8 +177,7 @@ export function PetProvider({ children }: PetProps) {
     newPetName: string,
     newPetBreed: string,
     newPetAge: string,
-    newPetOwnerId: number,
-    newPetProfilePhoto: string
+    newPetOwnerId: number
   ) {
     setPets(
       pets.map((item) => {
@@ -194,7 +188,6 @@ export function PetProvider({ children }: PetProps) {
             petBreed: newPetBreed,
             petAge: newPetAge,
             petOwnerId: newPetOwnerId,
-            petProfilePhoto: newPetProfilePhoto,
           };
         }
         return item;
