@@ -19,7 +19,6 @@ export function ClientComponentEditClient({
 
   function handleNewClientName(event: FormEvent<HTMLInputElement>) {
     setNewClientName(event?.currentTarget?.value);
-    console.log(clientSelected);
   }
 
   function handleNewClientEmail(event: FormEvent<HTMLInputElement>) {

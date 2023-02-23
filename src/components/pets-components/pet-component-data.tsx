@@ -51,7 +51,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                         </div>
                       </div>
                       <p className="text-main">{data["petOwnerName"]}</p>
-                      <p className="text-main lg:flex md:flex sm:flex hidden">
+                      <p className="text-main lg:flex md:flex sm:flex">
                         {data["petTreatmentState"]
                           ? "Left at" +
                             " " +
@@ -64,7 +64,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                             "min"
                           : data["petLeftAt"]}
                       </p>
-                      <p className="text-white lg:flex md:flex sm:flex hidden">
+                      <p className="text-white lg:flex md:flex sm:flex">
                         {data["petTreatmentState"]
                           ? "Leave at" +
                             " " +
