@@ -15,7 +15,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
   } = useContext(PetContext);
 
   return (
-    <div className="grid lg:grid-cols-2 md:grid-cols-1 min-[490px]:grid-cols-1 min-[320px]:grid-cols-1 grid-cols-2 lg:gap-x-8 gap-y-12 md:gap-y-12 sm:gap-y-12 ml-14 max-[382px]:ml-4 lg:ml-14 md:ml-14 sm:ml-6 mt-16 max-[382px]:mt-9">
+    <div className="grid lg:grid-cols-2 md:grid-cols-1 min-[490px]:grid-cols-1 min-[320px]:grid-cols-1 grid-cols-2 lg:gap-x-8 gap-y-12 md:gap-y-12 sm:gap-y-12 ml-9 max-[382px]:ml-4 lg:ml-14 md:ml-14 sm:ml-6 mt-16 max-[382px]:mt-9">
       {filteredPets?.length ? (
         <>
           {filteredPets?.map((data: any) => {
@@ -94,7 +94,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
           })}
         </>
       ) : (
-        <div className="absolute w-9/12 h-96 flex flex-col justify-center items-center space-y-6 mr-14">
+        <div className="absolute w-9/12 h-96 flex flex-col justify-center items-center space-y-6 mr-6 max-[382px]:mr-4 lg:mr-14 md:mr-14 sm:mr-6">
           <MagnifyingGlass
             size={64}
             className="text-button animate-bounce"
