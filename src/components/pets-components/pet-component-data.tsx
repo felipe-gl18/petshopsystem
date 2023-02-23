@@ -70,6 +70,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                             " " +
                             String(new Date(data["petLeaveAt"]).getHours()) +
                             "h" +
+                            " " +
                             "and" +
                             " " +
                             String(new Date(data["petLeaveAt"]).getMinutes()) +
