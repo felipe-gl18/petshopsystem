@@ -13,7 +13,7 @@ interface ClientData {
   clients?: Array<{
     clientName: string;
     clientEmail: string;
-    clientPhonenumber: string;
+    clientPhoneNumber: string;
     clientId: number | undefined;
     clientAddress: string;
     petsState: boolean;
@@ -32,11 +32,7 @@ interface ClientData {
     clientProfilePhoto: string;
   }>;
   filterdClients?: any;
-  handleClientName: (value: string) => void;
-  handleClientEmail: (value: string) => void;
-  handleClientPhonenumber: (value: string) => void;
   handleClientId: (value: number) => void;
-  handleClientAddress: (value: string) => void;
   handleEditClients: (
     newClientName: string,
     newClientEmail: string,
@@ -45,7 +41,12 @@ interface ClientData {
   ) => void;
   clientToBeUpdated?: number;
   handleClientToBeUpdated: (value: number | undefined) => void;
-  handleClients: () => void;
+  handleClients: (
+    clientName: string,
+    clientEmail: string,
+    clientPhoneNumber: string,
+    clientAddress: string
+  ) => void;
   handlePetsBelongedToClient: (value: any) => void;
   handlePetsBelongedComponentState: () => void;
   handleClientProfilePhoto: (value: string) => void;
@@ -57,9 +58,6 @@ interface ClientProps {
 }
 
 export const ClientContext = createContext<ClientData>({
-  handleClientName(value) {},
-  handleClientEmail(value) {},
-  handleClientPhonenumber(value) {},
   handleClientId(value) {},
   handleEditClients(value?) {},
   handleClientToBeUpdated(value?) {},
@@ -69,15 +67,10 @@ export const ClientContext = createContext<ClientData>({
   handleClientProfilePhoto(value) {},
   handleSearchedClients(value) {},
   handleDeleteClients(value) {},
-  handleClientAddress(value) {},
 });
 
 export function ClientProvider({ children }: ClientProps) {
-  const [clientName, setClientName] = useState("");
-  const [clientEmail, setClientEmail] = useState("");
-  const [clientPhonenumber, setClientPhonenumber] = useState("");
   const [clientProfilePhoto, setClientProfilePhoto] = useState(clientImage);
-  const [clientAddress, setClientAddress] = useState("");
   const [searchedClients, setSearchedClients] = useState("");
   const [filterdClients, setFilteredClients] = useState<any>();
   const [clientId, setClientId] = useState(0);
@@ -108,7 +101,7 @@ export function ClientProvider({ children }: ClientProps) {
     Array<{
       clientName: string;
       clientEmail: string;
-      clientPhonenumber: string;
+      clientPhoneNumber: string;
       clientId: number;
       clientAddress: string;
       petsState: boolean;
@@ -137,18 +130,6 @@ export function ClientProvider({ children }: ClientProps) {
     }
   });
 
-  function handleClientName(value: string) {
-    setClientName(value);
-  }
-
-  function handleClientEmail(value: string) {
-    setClientEmail(value);
-  }
-
-  function handleClientPhonenumber(value: string) {
-    setClientPhonenumber(value);
-  }
-
   function handleClientId(value: number) {
     setClientId(value);
   }
@@ -165,17 +146,18 @@ export function ClientProvider({ children }: ClientProps) {
     setSearchedClients(value);
   }
 
-  function handleClientAddress(value: string) {
-    setClientAddress(value);
-  }
-
-  function handleClients() {
+  function handleClients(
+    clientName: string,
+    clientEmail: string,
+    clientPhoneNumber: string,
+    clientAddress: string
+  ) {
     setClients([
       ...clients,
       {
         clientName,
         clientEmail,
-        clientPhonenumber,
+        clientPhoneNumber,
         clientAddress,
         petsState: false,
         clientProfilePhoto,
@@ -266,11 +248,7 @@ export function ClientProvider({ children }: ClientProps) {
       value={{
         clients,
         handleClients,
-        handleClientName,
-        handleClientEmail,
-        handleClientPhonenumber,
         handleClientId,
-        handleClientAddress,
         handleEditClients,
         handleClientToBeUpdated,
         clientToBeUpdated,

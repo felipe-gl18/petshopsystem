@@ -104,10 +104,10 @@ export function ClientComponentData({
                         close pets section
                       </p>
                     </div>
-                    <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-y-6 grid-cols-1">
+                    <div className="grid min-[1400px]:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 gap-y-6 grid-cols-1">
                       {data["pets"]?.map((petItem: any) => {
                         return (
-                          <div className="flex lg:flex-row md:flex-row sm:flex-col flex-col lg:space-x-6 md:space-x-6 lg:space-y-0 md:space-y-0 sm:space-y-6 space-y-6">
+                          <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col lg:space-x-6 md:space-x-6 lg:space-y-0 md:space-y-0 sm:space-y-6 space-y-6">
                             <div className="flex items-center justify-center w-44 h-44 bg-slate-200 rounded-xl">
                               <img
                                 className="w-8/12 h-8/12"

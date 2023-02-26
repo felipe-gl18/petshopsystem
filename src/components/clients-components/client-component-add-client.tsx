@@ -18,15 +18,7 @@ interface ClientComponentAddClientProps {
 export function ClientComponentAddClient({
   addClientComponentState,
 }: ClientComponentAddClientProps) {
-  const {
-    clients,
-    handleClients,
-    handleClientName,
-    handleClientEmail,
-    handleClientPhonenumber,
-    handleClientProfilePhoto,
-    handleClientAddress,
-  } = useContext(ClientContext);
+  const { handleClients } = useContext(ClientContext);
 
   const {
     register,
@@ -35,32 +27,16 @@ export function ClientComponentAddClient({
   } = useForm();
   const onsubmit = (data: any) => {
     addClientComponentState();
-    handleClients();
+    handleClients(
+      data.clientName,
+      data.clientEmail,
+      data.clientPhoneNumber,
+      data.clientAddress
+    );
   };
 
   const [clientSubmitInputState, setClientSubmitInputState] =
     useState<boolean>(false);
-
-  function handleName(event: FormEvent<HTMLInputElement>) {
-    handleClientName(event.currentTarget.value);
-  }
-
-  function handleEmail(event: FormEvent<HTMLInputElement>) {
-    handleClientEmail(event.currentTarget.value);
-  }
-
-  function handlePhonenumber(event: FormEvent<HTMLInputElement>) {
-    handleClientPhonenumber(event.currentTarget.value);
-  }
-
-  function handleAddress(event: FormEvent<HTMLInputElement>) {
-    handleClientAddress(event.currentTarget.value);
-  }
-
-  function creatingClientAction(event: FormEvent<HTMLFormElement>) {
-    handleClients();
-    addClientComponentState();
-  }
 
   return (
     <div className="w-full h-screen absolute bg-black bg-opacity-80 top-0 right-0 flex justify-center items-center">
@@ -97,7 +73,6 @@ export function ClientComponentAddClient({
                     })}
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     placeholder="eg: Felipe Gadelha Lino"
-                    onChange={handleName}
                   />
                 </div>
                 <p className="text-button text-sm">
@@ -122,7 +97,6 @@ export function ClientComponentAddClient({
                     })}
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     placeholder="eg: felipegadelha@gmail.com"
-                    onChange={handleEmail}
                   />
                 </div>
                 <p className="text-button text-sm">
@@ -147,7 +121,6 @@ export function ClientComponentAddClient({
                     })}
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     placeholder="Rua Mariinha Paiva, Bairro Sinhá Sabóia, n°362"
-                    onChange={handleAddress}
                   />
                 </div>
                 <p className="text-button text-sm">
@@ -168,7 +141,6 @@ export function ClientComponentAddClient({
                     })}
                     className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                     placeholder="eg: (88) 992048450"
-                    onChange={handlePhonenumber}
                     mask={"(99) 99999-9999"}
                   />
                 </div>

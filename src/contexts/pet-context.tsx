@@ -23,14 +23,12 @@ interface petData {
     petProfilePhoto: string;
   }>;
   filteredPets?: any;
-  handlePets: () => void;
-  handlePetName: (value: string) => void;
-  handlePetBreed: (value: string) => void;
-  handlePetAge: (value: string) => void;
-  handlePetOwnerId: (value: number) => void;
-  handlePetLeftAt: (value: Date) => void;
-  handlePetLeaveAt: (value: number) => void;
-  handlePetId: (value: number) => void;
+  handlePets: (
+    petName: string,
+    petBreed: string,
+    petAge: string,
+    petOwnerId: number
+  ) => void;
   handleEditPets: (
     newPetName: string,
     newPetBreed: string,
@@ -39,7 +37,6 @@ interface petData {
   ) => void;
   handlePetToBeUpdated: (value: number | undefined) => void;
   petToBeUpdated?: number;
-  handlePetOwnerName: (value: string) => void;
   handlePetTreatmentState: () => void;
   handleSearchedPets: (value: string) => void;
   handleDeletePets: (value: boolean) => void;
@@ -50,17 +47,9 @@ interface PetProps {
 }
 
 export const PetContext = createContext<petData>({
-  handlePetName(value) {},
-  handlePetBreed(value) {},
-  handlePetAge(value) {},
-  handlePetOwnerId(value) {},
-  handlePetLeftAt(value) {},
-  handlePetLeaveAt(value) {},
-  handlePetId(value) {},
   handlePets() {},
   handleEditPets(value?) {},
   handlePetToBeUpdated(value) {},
-  handlePetOwnerName(value) {},
   handlePetTreatmentState() {},
   handleSearchedPets(value) {},
   handleDeletePets(value) {},
@@ -68,15 +57,7 @@ export const PetContext = createContext<petData>({
 
 export function PetProvider({ children }: PetProps) {
   const { clients, handlePetsBelongedToClient } = useContext(ClientContext);
-  const [petName, setPetName] = useState("");
-  const [petBreed, setPetBreed] = useState("");
-  const [petAge, setPetAge] = useState("");
-  const [petOwnerId, setPetOwnerId] = useState(0);
-  const [petId, setPetId] = useState(0);
-  const [petLeftAt, setPetLeftAt] = useState<Date | string>();
-  const [petLeaveAt, setPetLeaveAt] = useState(Date.now());
   const [petToBeUpdated, setPetToBeUpdated] = useState<number | undefined>(0);
-  const [petOwnerName, setPetOwnerName] = useState("");
   const [petTreatmentState, setPetTreatmentState] = useState(false);
   const [petProfilePhoto, setPetProfilePhoto] = useState(pet);
   const [searchedPets, setSearchedPets] = useState("");
@@ -108,47 +89,26 @@ export function PetProvider({ children }: PetProps) {
     }
   });
 
-  function handlePetName(value: string) {
-    setPetName(value);
-  }
-  function handlePetBreed(value: string) {
-    setPetBreed(value);
-  }
-  function handlePetAge(value: string) {
-    setPetAge(value);
-  }
-  function handlePetOwnerId(value: number) {
-    setPetOwnerId(value);
-  }
-  function handlePetId(value: number) {
-    setPetId(value);
-  }
-  function handlePetLeftAt(value: Date) {
-    setPetLeftAt(value);
-  }
-
-  function handlePetLeaveAt(value: number) {
-    setPetLeaveAt(value);
-  }
-
   function handlePetToBeUpdated(value: number | undefined) {
     setPetToBeUpdated(value);
-  }
-
-  function handlePetOwnerName(value: string) {
-    setPetOwnerName(value);
   }
 
   function handleSearchedPets(value: string) {
     setSearchedPets(value);
   }
 
-  function handlePets() {
+  function handlePets(
+    petName: string,
+    petBreed: string,
+    petAge: string,
+    petOwnerId: number
+  ) {
     let petOwner = clients?.map((clientItem) => {
-      if (clientItem?.clientId === petOwnerId) {
+      if (clientItem?.clientId == petOwnerId) {
         return clientItem?.clientName;
       }
     });
+
     setPets([
       ...pets,
       {
@@ -166,11 +126,6 @@ export function PetProvider({ children }: PetProps) {
         petProfilePhoto,
       },
     ]);
-    setPetName("");
-    setPetBreed("");
-    setPetAge("");
-    setPetOwnerId(0);
-    setPetOwnerName("");
   }
 
   function handleEditPets(
@@ -211,7 +166,7 @@ export function PetProvider({ children }: PetProps) {
   useEffect(() => {
     let clientsWithPets = clients?.map((clientItem) => {
       let petsBelonged = pets.filter(
-        (petItem) => petItem.petOwnerId === clientItem.clientId
+        (petItem) => petItem.petOwnerId == clientItem.clientId
       );
       return {
         ...clientItem,
@@ -262,18 +217,10 @@ export function PetProvider({ children }: PetProps) {
       value={{
         pets,
         handlePets,
-        handlePetName,
-        handlePetBreed,
-        handlePetAge,
-        handlePetOwnerId,
-        handlePetLeftAt,
-        handlePetLeaveAt,
-        handlePetId,
         handleEditPets,
         handlePetToBeUpdated,
         handlePetTreatmentState,
         petToBeUpdated,
-        handlePetOwnerName,
         handleSearchedPets,
         filteredPets,
         handleDeletePets,

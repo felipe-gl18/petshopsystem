@@ -10,16 +10,7 @@ interface PetComponentAddPetProps {
 export function PetComponentAddPet({
   addPetComponentState,
 }: PetComponentAddPetProps) {
-  const {
-    handlePetName,
-    handlePetBreed,
-    handlePetAge,
-    handlePetOwnerId,
-    handlePetLeftAt,
-    handlePetLeaveAt,
-    handlePetId,
-    handlePets,
-  } = useContext(PetContext);
+  const { handlePets } = useContext(PetContext);
 
   const {
     register,
@@ -28,29 +19,8 @@ export function PetComponentAddPet({
   } = useForm();
   const onsubmit = (data: any) => {
     addPetComponentState();
-    handlePets();
+    handlePets(data.petName, data.petBreed, data.petAge, data.petOwnerId);
   };
-
-  function handleName(event: FormEvent<HTMLInputElement>) {
-    handlePetName(event.currentTarget.value);
-  }
-  function handleBreed(event: FormEvent<HTMLInputElement>) {
-    handlePetBreed(event.currentTarget.value);
-  }
-  function handleAge(event: FormEvent<HTMLInputElement>) {
-    handlePetAge(event.currentTarget.value);
-  }
-  function handleOwnerId(event: FormEvent<HTMLInputElement>) {
-    handlePetOwnerId(Number(event.currentTarget.value));
-  }
-  function handleId(event: FormEvent<HTMLInputElement>) {
-    handlePetId(Number(event.currentTarget.value));
-  }
-
-  function creatingPetAction(event: any) {
-    addPetComponentState();
-    handlePets();
-  }
 
   return (
     <div className="w-full h-screen absolute bg-black bg-opacity-80 top-0 right-0 flex justify-center items-center py-6">
@@ -84,7 +54,6 @@ export function PetComponentAddPet({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: Jerry"
-                      onChange={handleName}
                     />
                   </div>
                   <p className="text-button text-sm">
@@ -108,7 +77,6 @@ export function PetComponentAddPet({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: Angorá"
-                      onChange={handleBreed}
                     />
                   </div>
                   <p className="text-button text-sm">
@@ -132,7 +100,6 @@ export function PetComponentAddPet({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: 1.8"
-                      onChange={handleAge}
                     />
                   </div>
                   <p className="text-button text-sm">
@@ -157,7 +124,6 @@ export function PetComponentAddPet({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: 19283298"
-                      onChange={handleOwnerId}
                     />
                   </div>
                   <p className="text-button text-sm">

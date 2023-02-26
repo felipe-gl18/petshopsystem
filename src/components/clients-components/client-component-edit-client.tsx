@@ -20,10 +20,6 @@ export function ClientComponentEditClient({
 }: ClientEditComponentProps) {
   const { handleEditClients, clientToBeUpdated, clients } =
     useContext(ClientContext);
-  const [newClientName, setNewClientName] = useState<string>();
-  const [newClientEmail, setNewClientEmail] = useState<string>();
-  const [newClientPhonenumber, setNewClientPhonenumber] = useState<string>();
-  const [newClientAddress, setNewClientAddress] = useState<string>();
   const [clientSelected, setclientSelected] = useState<any>();
 
   const {
@@ -34,46 +30,12 @@ export function ClientComponentEditClient({
   const onsubmit = (data: any) => {
     editClientComponentState();
     handleEditClients(
-      newClientName || "undefined",
-      newClientEmail || "undefined",
-      newClientPhonenumber || "undefined",
-      newClientAddress || "undefined"
+      data.clientName,
+      data.clientEmail,
+      data.clientAddress,
+      data.clientPhoneNumber
     );
   };
-
-  const [clientSubmitInputState, setClientSubmitInputState] =
-    useState<boolean>(false);
-
-  function handleNewClientName(event: FormEvent<HTMLInputElement>) {
-    if (event?.currentTarget?.value.length > 0) {
-      setClientSubmitInputState(false);
-    } else {
-      setClientSubmitInputState(true);
-    }
-    setNewClientName(event?.currentTarget?.value);
-  }
-
-  function handleNewClientEmail(event: FormEvent<HTMLInputElement>) {
-    if (event?.currentTarget?.value.length > 0) {
-      setClientSubmitInputState(false);
-    } else {
-      setClientSubmitInputState(true);
-    }
-    setNewClientEmail(event?.currentTarget?.value);
-  }
-
-  function handleNewClientPhonenumber(event: FormEvent<HTMLInputElement>) {
-    setNewClientPhonenumber(event?.currentTarget?.value);
-  }
-
-  function handleNewClientAddress(event: FormEvent<HTMLInputElement>) {
-    if (event?.currentTarget?.value.length > 0) {
-      setClientSubmitInputState(false);
-    } else {
-      setClientSubmitInputState(true);
-    }
-    setNewClientAddress(event?.currentTarget?.value);
-  }
 
   useEffect(() => {
     setclientSelected(
@@ -144,7 +106,6 @@ export function ClientComponentEditClient({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: Junior Aguiar Silva"
-                      onChange={handleNewClientName}
                     />
                   </div>
                   <p className="text-button text-sm">
@@ -169,7 +130,6 @@ export function ClientComponentEditClient({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: ghostfrost121@gmail.com"
-                      onChange={handleNewClientEmail}
                     />
                   </div>
                   <p className="text-button text-sm">
@@ -190,7 +150,6 @@ export function ClientComponentEditClient({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: (88) 992048450"
-                      onChange={handleNewClientPhonenumber}
                       mask={"(99) 99999-9999"}
                     />
                   </div>
@@ -218,7 +177,6 @@ export function ClientComponentEditClient({
                       })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
                       placeholder="eg: Bairo X, rua x, n°xx"
-                      onChange={handleNewClientAddress}
                     />
                   </div>
                   <p className="text-button text-sm">
@@ -230,11 +188,7 @@ export function ClientComponentEditClient({
             <div className="flex justify-end pr-9">
               <input
                 type="submit"
-                className={`flex items-center justify-center w-40 h-10 text-lg font-bold bg-button ${
-                  clientSubmitInputState
-                    ? `bg-opacity-40 cursor-not-allowed`
-                    : null
-                } rounded-full`}
+                className={`flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full`}
                 value="Edit Client"
               />
             </div>
