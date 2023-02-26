@@ -100,7 +100,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
             className="text-button animate-bounce"
             weight="bold"
           />
-          <p className="text-3xl font-black text-main">Nothing founded ...</p>
+          <p className="text-3xl font-black text-main">Nothing found ...</p>
         </div>
       )}
     </div>

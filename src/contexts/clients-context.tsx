@@ -40,7 +40,8 @@ interface ClientData {
   handleEditClients: (
     newClientName: string,
     newClientEmail: string,
-    newClientPhonenumber: string
+    newClientPhonenumber: string,
+    newClientAddress: string
   ) => void;
   clientToBeUpdated?: number;
   handleClientToBeUpdated: (value: number | undefined) => void;
@@ -186,7 +187,8 @@ export function ClientProvider({ children }: ClientProps) {
   function handleEditClients(
     newClientName: string,
     newClientEmail: string,
-    newClientPhonenumber: string
+    newClientPhonenumber: string,
+    newClientAddress: string
   ) {
     setClients(
       clients.map((clientItem) => {
@@ -196,6 +198,7 @@ export function ClientProvider({ children }: ClientProps) {
             clientName: newClientName || "undefined",
             clientEmail: newClientEmail || "undefined",
             clientPhonenumber: newClientPhonenumber || "undefined",
+            clientAddress: newClientAddress || "undefined",
           };
         }
         return clientItem;

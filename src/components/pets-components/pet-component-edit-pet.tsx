@@ -1,5 +1,6 @@
 import { FileArrowUp, XCircle } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { PetContext } from "../../contexts/pet-context";
 
 interface PetEditComponentProps {
@@ -15,6 +16,20 @@ export function PetComponentEditPet({
   const [newPetAge, setNewPetAge] = useState<string>();
   const [newPetOwnerId, setNewPetOwnerId] = useState<number>();
   const [petSelected, setPetSelected] = useState<any>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onsubmit = (data: any) => {
+    editPetComponentState();
+    handleEditPets(
+      newPetName || "undefined",
+      newPetBreed || "undefined",
+      newPetAge || "undefined",
+      newPetOwnerId || 0
+    );
+  };
 
   function handleNewPetName(event: FormEvent<HTMLInputElement>) {
     setNewPetName(event?.currentTarget?.value);
@@ -110,82 +125,117 @@ export function PetComponentEditPet({
           })}
         </div>
         <div className="space-y-8 py-9">
-          <div>
+          <form onSubmit={handleSubmit(onsubmit)}>
             <div className="flex lg:space-x-32 md:space-x-32 sm:space-x-7 space-x-7">
               <div className="space-y-6">
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Pet name</p>
-                  <div className="w-44 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                  <div className="w-44 h-9 flex border-0 bg-main bg-opacity-30 items-center px-6 space-x-4 rounded-md">
                     <input
+                      {...register("petName", {
+                        required: "This is required",
+                        minLength: {
+                          value: 3,
+                          message: "Min length is 3",
+                        },
+                        maxLength: {
+                          value: 10,
+                          message: "Max length is 10",
+                        },
+                      })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
-                      type="text"
-                      name=""
-                      id=""
                       placeholder="eg: Jerry"
                       onChange={handleNewPetName}
                     />
                   </div>
+                  <p className="text-button text-sm">
+                    {String(errors.petName?.message || "")}
+                  </p>
                 </div>
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Breed</p>
-                  <div className="w-48 h-9 flex border-2 border-button items-center pl-6 space-x-4 rounded-md">
+                  <div className="w-48 h-9 flex border-0 bg-main bg-opacity-30 items-center pl-6 space-x-4 rounded-md">
                     <input
+                      {...register("petBreed", {
+                        required: "This is required",
+                        minLength: {
+                          value: 4,
+                          message: "Min length is 4",
+                        },
+                        maxLength: {
+                          value: 14,
+                          message: "Max length is 14",
+                        },
+                      })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
-                      type="text"
-                      name=""
-                      id=""
                       placeholder="eg: Angorá"
                       onChange={handleNewPetBreed}
                     />
                   </div>
+                  <p className="text-button text-sm">
+                    {String(errors.petBreed?.message || "")}
+                  </p>
                 </div>
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Age</p>
-                  <div className="w-32 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                  <div className="w-32 h-9 flex border-0 bg-main bg-opacity-30 items-center px-6 space-x-4 rounded-md">
                     <input
+                      {...register("petAge", {
+                        required: "This is required",
+                        minLength: {
+                          value: 1,
+                          message: "please, put a valid age",
+                        },
+                        maxLength: {
+                          value: 3,
+                          message: "please, put a valid age",
+                        },
+                      })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
-                      type="text"
-                      name=""
-                      id=""
                       placeholder="eg: 1.8"
                       onChange={handleNewPetAge}
                     />
                   </div>
+                  <p className="text-button text-sm">
+                    {String(errors.petAge?.message || "")}
+                  </p>
                 </div>
               </div>
               <div className="space-y-6">
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Owner id</p>
-                  <div className="lg:w-36 md:w-36 sm:w-24 w-20 h-9 flex border-2 border-button items-center px-6 space-x-4 rounded-md">
+                  <div className="lg:w-36 md:w-36 sm:w-24 w-20 h-9 flex border-0 bg-main bg-opacity-30 items-center px-6 space-x-4 rounded-md">
                     <input
+                      {...register("petOwnerId", {
+                        required: "This is required",
+                        minLength: {
+                          value: 5,
+                          message: "Min length is 5",
+                        },
+                        maxLength: {
+                          value: 16,
+                          message: "Max length is 16",
+                        },
+                      })}
                       className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
-                      type="text"
-                      name=""
-                      id=""
                       placeholder="eg: 10290182"
                       onChange={handleNewPetOwnerId}
                     />
                   </div>
+                  <p className="text-button text-sm">
+                    {String(errors.petOwnerId?.message || "")}
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex justify-end pr-9">
-            <button
-              onClick={() => {
-                handleEditPets(
-                  newPetName || "err",
-                  newPetBreed || "err",
-                  newPetAge || "err",
-                  newPetOwnerId || 0
-                );
-                editPetComponentState();
-              }}
-              className="flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full"
-            >
-              Edit pet
-            </button>
-          </div>
+            <div className="flex justify-end pr-9">
+              <input
+                type="submit"
+                className="flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full"
+                value="Edit cat"
+              />
+            </div>
+          </form>
         </div>
       </div>
     </div>
