@@ -19,7 +19,13 @@ export function PetComponentAddPet({
   } = useForm();
   const onsubmit = (data: any) => {
     addPetComponentState();
-    handlePets(data.petName, data.petBreed, data.petAge, data.petOwnerId);
+    handlePets(
+      data.petName,
+      data.petBreed,
+      data.petAge,
+      data.petOwnerId,
+      data.petGender
+    );
   };
 
   return (
@@ -128,6 +134,24 @@ export function PetComponentAddPet({
                   </div>
                   <p className="text-button text-sm">
                     {String(errors.petOwnerId?.message || "")}
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <p className="text-main font-extrabold">Gender</p>
+                  <div className="lg:w-80 md:w-80 sm:w-60 w-52 h-9 flex border-0 bg-main bg-opacity-30 items-center pl-6 space-x-4 rounded-md">
+                    <select
+                      {...register("petGender", {
+                        required: "This is required",
+                      })}
+                      className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
+                      placeholder="eg: Angorá"
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <p className="text-button text-sm">
+                    {String(errors.petGender?.message || "")}
                   </p>
                 </div>
               </div>

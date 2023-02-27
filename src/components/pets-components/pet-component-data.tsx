@@ -1,4 +1,10 @@
-import { MagnifyingGlass, Pen, Trash } from "phosphor-react";
+import {
+  MagnifyingGlass,
+  Pen,
+  Trash,
+  GenderMale,
+  GenderFemale,
+} from "phosphor-react";
 import { useContext } from "react";
 import { PetContext } from "../../contexts/pet-context";
 
@@ -32,7 +38,22 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                   <div className="space-y-6 flex flex-col justify-center">
                     <div className="space-y-2">
                       <div className="text-main text-3xl lg:text-xl md:text-3xl sm:text-3xl font-black flex items-center space-x-20">
-                        <p>{data["petName"]}</p>
+                        <div className="flex items-center space-x-3">
+                          <p>{data["petName"]}</p>
+                          {data["petGender"] === "male" ? (
+                            <GenderMale
+                              size={20}
+                              color="lightblue"
+                              weight="bold"
+                            />
+                          ) : (
+                            <GenderFemale
+                              size={20}
+                              color="lightblue"
+                              weight="bold"
+                            />
+                          )}
+                        </div>
                         <div className="flex space-x-4">
                           <Pen
                             size={32}

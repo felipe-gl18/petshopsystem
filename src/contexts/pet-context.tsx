@@ -21,13 +21,15 @@ interface petData {
     petId: number;
     petTreatmentState: boolean;
     petProfilePhoto: string;
+    petGender: string;
   }>;
   filteredPets?: any;
   handlePets: (
     petName: string,
     petBreed: string,
     petAge: string,
-    petOwnerId: number
+    petOwnerId: number,
+    petGender: string
   ) => void;
   handleEditPets: (
     newPetName: string,
@@ -77,6 +79,7 @@ export function PetProvider({ children }: PetProps) {
       petLeaveAt: number | string;
       petTreatmentState: boolean;
       petProfilePhoto: string;
+      petGender: string;
     }>
   >(() => {
     if (localStorage.getItem("pets") === null) {
@@ -101,7 +104,8 @@ export function PetProvider({ children }: PetProps) {
     petName: string,
     petBreed: string,
     petAge: string,
-    petOwnerId: number
+    petOwnerId: number,
+    petGender: string
   ) {
     let petOwner = clients?.map((clientItem) => {
       if (clientItem?.clientId == petOwnerId) {
@@ -114,6 +118,7 @@ export function PetProvider({ children }: PetProps) {
       {
         petName,
         petBreed,
+        petGender,
         petAge,
         petOwnerId,
         petOwnerName: petOwner,
