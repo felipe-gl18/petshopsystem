@@ -49,7 +49,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                           ) : (
                             <GenderFemale
                               size={20}
-                              color="lightblue"
+                              color="lightpink"
                               weight="bold"
                             />
                           )}
@@ -74,28 +74,12 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                       <p className="text-main">{data["petOwnerName"]}</p>
                       <p className="text-main lg:flex md:flex sm:flex">
                         {data["petTreatmentState"]
-                          ? "Left at" +
-                            " " +
-                            String(new Date(data["petLeftAt"]).getHours()) +
-                            "h" +
-                            " " +
-                            "and" +
-                            " " +
-                            String(new Date(data["petLeftAt"]).getMinutes()) +
-                            "min"
+                          ? "Left at " + data["petLeftAt"]
                           : data["petLeftAt"]}
                       </p>
                       <p className="text-white lg:flex md:flex sm:flex">
                         {data["petTreatmentState"]
-                          ? "Leave at" +
-                            " " +
-                            String(new Date(data["petLeaveAt"]).getHours()) +
-                            "h" +
-                            " " +
-                            "and" +
-                            " " +
-                            String(new Date(data["petLeaveAt"]).getMinutes()) +
-                            "min"
+                          ? "Leave at " + data["petLeaveAt"]
                           : data["petLeaveAt"]}
                       </p>
                     </div>

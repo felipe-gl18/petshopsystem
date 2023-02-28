@@ -16,7 +16,7 @@ interface petData {
     petAge: string;
     petOwnerId: number;
     petOwnerName: Array<string | undefined> | undefined;
-    petLeftAt: Date | string;
+    petLeftAt: string;
     petLeaveAt: number | string;
     petId: number;
     petTreatmentState: boolean;
@@ -64,9 +64,7 @@ export function PetProvider({ children }: PetProps) {
   const [petProfilePhoto, setPetProfilePhoto] = useState(pet);
   const [searchedPets, setSearchedPets] = useState("");
   const [filteredPets, setFilteredPets] = useState<any>();
-  const [deletePetAction, setDeletePetAction] = useState<boolean | undefined>(
-    false
-  );
+  const [deletePetAction, setDeletePetAction] = useState<boolean | undefined>();
   const [pets, setPets] = useState<
     Array<{
       petName: string;
@@ -75,7 +73,7 @@ export function PetProvider({ children }: PetProps) {
       petOwnerId: number;
       petOwnerName: Array<string | undefined> | undefined;
       petId: number;
-      petLeftAt: Date | string;
+      petLeftAt: string;
       petLeaveAt: number | string;
       petTreatmentState: boolean;
       petProfilePhoto: string;
@@ -123,10 +121,8 @@ export function PetProvider({ children }: PetProps) {
         petOwnerId,
         petOwnerName: petOwner,
         petTreatmentState: false,
-        petLeftAt: petTreatmentState ? new Date() : "entry not checked",
-        petLeaveAt: petTreatmentState
-          ? new Date().setHours(new Date().getHours() + 1)
-          : "entry not checked",
+        petLeftAt: "entry not checked",
+        petLeaveAt: "entry not checked",
         petId: Math.round(Math.random() * 1e9),
         petProfilePhoto,
       },
@@ -141,7 +137,7 @@ export function PetProvider({ children }: PetProps) {
   ) {
     setPets(
       pets.map((item) => {
-        if (item.petId === petToBeUpdated) {
+        if (item.petId == petToBeUpdated) {
           return {
             ...item,
             petName: newPetName,
@@ -157,11 +153,11 @@ export function PetProvider({ children }: PetProps) {
 
   function handleDeletePets(value?: boolean) {
     setDeletePetAction(value);
-    setPets(pets.filter((petItem) => petItem["petId"] !== petToBeUpdated));
+    setPets(pets.filter((petItem) => petItem["petId"] != petToBeUpdated));
   }
 
   function handlePetTreatmentState() {
-    setPetTreatmentState(!petTreatmentState);
+    setPetTreatmentState(true);
   }
 
   function saveLocalPets() {
@@ -182,28 +178,37 @@ export function PetProvider({ children }: PetProps) {
     saveLocalPets();
     handlePetsBelongedToClient(clientsWithPets);
     setFilteredPets(pets);
+    setPetToBeUpdated(0);
   }, [pets]);
 
   useEffect(() => {
-    setPets(
-      pets.map((petItem) => {
-        if (petItem.petId === petToBeUpdated) {
-          return {
-            ...petItem,
-            petTreatmentState: petTreatmentState,
-            petLeftAt: petTreatmentState ? new Date() : "entry not checked",
-            petLeaveAt: petTreatmentState
-              ? new Date().setHours(new Date().getHours() + 1)
-              : "entry not checked",
-          };
-        }
-        return petItem;
-      })
-    );
-  }, [petTreatmentState]);
-
-  useEffect(() => {
     deletePetAction ? handleDeletePets() : null;
+    petTreatmentState
+      ? (setPets(
+          pets.map((petItem: any) => {
+            if (petItem["petId"] == petToBeUpdated) {
+              return {
+                ...petItem,
+                petTreatmentState: !petItem["petTreatmentState"],
+                petLeftAt: petItem["petTreatmentState"]
+                  ? `entry not checked`
+                  : `${String(new Date().getHours())}h and ${String(
+                      new Date().getMinutes()
+                    )}min`,
+                petLeaveAt: petItem["petTreatmentState"]
+                  ? `entry not checked`
+                  : `${String(
+                      new Date(
+                        new Date().setHours(new Date().getHours() + 1)
+                      ).getHours()
+                    )}h and ${String(new Date().getMinutes())}min`,
+              };
+            }
+            return petItem;
+          })
+        ),
+        setPetTreatmentState(false))
+      : null;
   }, [petToBeUpdated]);
 
   useEffect(() => {

@@ -40,7 +40,7 @@ export function ClientComponentAddClient({
 
   return (
     <div className="w-full h-screen absolute bg-black bg-opacity-80 top-0 right-0 flex justify-center items-center">
-      <div className="lg:w-4/12 md:w-9/12 sm:w-9/12 w-11/12 lg:h-4/5 md:h-4/5 sm:h-5/6 h-5/6 overflow-auto bg-main bg-opacity-20 rounded-2xl lg:pl-12 md:pl-12 sm:pl-6 pl-6 space-y-8 pb-6">
+      <div className="min-[1024px]:w-5/12 min-[1200px]:lg:w-4/12 md:w-8/12 sm:w-9/12 w-11/12 lg:h-4/5 md:h-4/5 sm:h-5/6 h-5/6 overflow-auto bg-main bg-opacity-20 rounded-2xl lg:pl-12 md:pl-12 sm:pl-6 pl-6 space-y-8 pb-6">
         <div className="flex justify-end w-full">
           <XCircle
             size={42}
