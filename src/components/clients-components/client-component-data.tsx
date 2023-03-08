@@ -37,11 +37,8 @@ export function ClientComponentData({
         <>
           {filterdClients.map((data: any) => {
             return (
-              <>
-                <div
-                  key={data["clientId"]}
-                  className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:space-y-0 md:space-y-0 sm:space-y-0 space-y-4 lg:space-x-6 md:space-x-9 sm:space-x-6"
-                >
+              <div key={data["clientId"]} className="space-y-8">
+                <div className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:space-y-0 md:space-y-0 sm:space-y-0 space-y-4 lg:space-x-6 md:space-x-9 sm:space-x-6">
                   <div className="flex items-center justify-center w-48 lg:w-44 md:w-56 sm:w-56 h-48 lg:h-44 md:h-56 sm:h-56 bg-slate-200 hover:bg-opacity-60 transition duration-500 rounded-xl cursor-pointer">
                     <img
                       onClick={() => {
@@ -107,8 +104,11 @@ export function ClientComponentData({
                     <div className="grid min-[1400px]:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 gap-y-6 grid-cols-1">
                       {data["pets"]?.map((petItem: any) => {
                         return (
-                          <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col lg:space-x-6 md:space-x-6 lg:space-y-0 md:space-y-0 sm:space-y-6 space-y-6">
-                            <div className="flex items-center justify-center w-44 h-44 bg-slate-200 rounded-xl">
+                          <div
+                            key={petItem["petId"]}
+                            className="flex lg:flex-row md:flex-col sm:flex-col flex-col lg:space-x-6 md:space-x-6 lg:space-y-0 md:space-y-0 sm:space-y-6 space-y-6"
+                          >
+                            <div className="flex items-center justify-center w-44 h-44 bg-slate-200 bg-opacity-60 rounded-xl">
                               <img
                                 className="w-8/12 h-8/12"
                                 src={petItem["petProfilePhoto"]}
@@ -162,7 +162,7 @@ export function ClientComponentData({
                     </p>
                   </div>
                 )}
-              </>
+              </div>
             );
           })}
         </>

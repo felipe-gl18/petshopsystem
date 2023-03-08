@@ -4,6 +4,7 @@ import {
   Trash,
   GenderMale,
   GenderFemale,
+  Key,
 } from "phosphor-react";
 import { useContext } from "react";
 import { PetContext } from "../../contexts/pet-context";
@@ -26,7 +27,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
         <>
           {filteredPets?.map((data: any) => {
             return (
-              <>
+              <div key={data["petId"]}>
                 <div className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:space-y-0 md:space-y-0 sm:space-y-0 space-y-4 lg:space-x-6 md:space-x-12 sm:space-x-12">
                   <div className="flex items-center justify-center w-48 lg:w-44 md:w-56 sm:w-56 h-48 lg:h-44 md:h-56 sm:h-56 bg-slate-200 rounded-xl">
                     <img
@@ -94,7 +95,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                     </button>
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
         </>
