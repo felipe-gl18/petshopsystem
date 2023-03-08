@@ -78,7 +78,10 @@ export function ClientComponentEditClient({
                   <p className="text-sm text-main">
                     {clientItem["clientEmail"]}
                   </p>
-                  <p className="text-main">{clientItem["clientPhonenumber"]}</p>
+                  <p className="text-sm text-main">
+                    {clientItem["clientAddress"]}
+                  </p>
+                  <p className="text-main">{clientItem["clientPhoneNumber"]}</p>
                 </div>
               </>
             );

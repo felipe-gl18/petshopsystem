@@ -46,7 +46,7 @@ export function ClientComponentCardInfo({
                     </div>
                     <p className="text-main">{clientItem["clientEmail"]}</p>
                     <p className="text-main">
-                      {clientItem["clientPhonenumber"]}
+                      {clientItem["clientPhoneNumber"]}
                     </p>
                     <p className="text-main">{clientItem["clientAddress"]}</p>
                   </div>

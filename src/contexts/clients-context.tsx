@@ -169,7 +169,7 @@ export function ClientProvider({ children }: ClientProps) {
   function handleEditClients(
     newClientName: string,
     newClientEmail: string,
-    newClientPhonenumber: string,
+    newClientPhoneNumber: string,
     newClientAddress: string
   ) {
     setClients(
@@ -179,7 +179,7 @@ export function ClientProvider({ children }: ClientProps) {
             ...clientItem,
             clientName: newClientName || "undefined",
             clientEmail: newClientEmail || "undefined",
-            clientPhonenumber: newClientPhonenumber || "undefined",
+            clientPhoneNumber: newClientPhoneNumber || "undefined",
             clientAddress: newClientAddress || "undefined",
           };
         }
