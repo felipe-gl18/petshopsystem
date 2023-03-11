@@ -31,9 +31,13 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                 <div className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:space-y-0 md:space-y-0 sm:space-y-0 space-y-4 lg:space-x-6 md:space-x-12 sm:space-x-12">
                   <div className="flex items-center justify-center w-48 lg:w-44 md:w-56 sm:w-56 h-48 lg:h-44 md:h-56 sm:h-56 bg-slate-200 rounded-xl">
                     <img
-                      className="w-7/12 h-7/12"
+                      className={
+                        data["petProfilePhoto"] == "/src/assets/dog-track.png"
+                          ? "w-7/12 h-7/12"
+                          : "w-full h-full rounded-xl"
+                      }
                       src={data["petProfilePhoto"]}
-                      alt="pet icon"
+                      alt={data["petProfilePhoto"]}
                     />
                   </div>
                   <div className="space-y-6 flex flex-col justify-center">

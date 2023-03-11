@@ -1,7 +1,8 @@
 import { Cat, FileArrowUp, Key, XCircle } from "phosphor-react";
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { PetContext } from "../../contexts/pet-context";
 import { useForm } from "react-hook-form";
+import useDrivePicker from "react-google-drive-picker";
 
 interface PetComponentAddPetProps {
   addPetComponentState: () => void;
@@ -11,6 +12,36 @@ export function PetComponentAddPet({
   addPetComponentState,
 }: PetComponentAddPetProps) {
   const { handlePets } = useContext(PetContext);
+  const [openPicker, data] = useDrivePicker();
+  const [petProfilePhoto, setPetProfilePhoto] = useState<string>("");
+
+  function handleProfilePhoto() {
+    const handleOpenPicker = () => {
+      openPicker({
+        clientId:
+          "285393898991-r81lciffuskvkasb7gackrv946pc8dho.apps.googleusercontent.com",
+        developerKey: "AIzaSyDqxmzYfCBtHR2EEK45f-sMtzkAa0e6xfY",
+        viewId: "DOCS",
+        showUploadView: true,
+        token:
+          "ya29.a0AVvZVsrPdE_709p5HbvOAaPHAzC6ZXc3X5RTtpBSdQZQtl_y-vVRC4lEAo-zFegxfnK1MckK8fetS_UE11eVBBUJ4Y2r1HZmCWtSVs_qXbx-014QSKhLZObKK8p34lhQN3NknJHfAgwzlIG2utNrck7t3zT7aCgYKAYMSARESFQGbdwaINwqwNvCJtx-G7rAJsT4Orw0163",
+        showUploadFolders: true,
+        supportDrives: true,
+        multiselect: true,
+        callbackFunction: (data) => {
+          if (data.action === "cancel") {
+            console.log("User clicked cancel/close button");
+          }
+          data.docs?.map((dataItem) => {
+            console.log(dataItem);
+            let imgId = dataItem["id"];
+            setPetProfilePhoto(imgId);
+          });
+        },
+      });
+    };
+    handleOpenPicker();
+  }
 
   const {
     register,
@@ -18,13 +49,16 @@ export function PetComponentAddPet({
     formState: { errors },
   } = useForm();
   const onsubmit = (data: any) => {
+    console.log("submited");
+
     addPetComponentState();
     handlePets(
       data.petName,
       data.petBreed,
       data.petAge,
       data.petOwnerId,
-      data.petGender
+      data.petGender,
+      petProfilePhoto
     );
   };
 
@@ -154,11 +188,19 @@ export function PetComponentAddPet({
                     {String(errors.petGender?.message || "")}
                   </p>
                 </div>
+                <div className="space-y-3">
+                  <div
+                    onClick={handleProfilePhoto}
+                    className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
+                  >
+                    Upload photo's cat
+                  </div>
+                </div>
               </div>
             </div>
             <input
               type="submit"
-              value="Create client"
+              value="Create pet"
               className="flex items-center justify-center w-40 h-9 text-lg font-bold bg-button rounded-full"
             />
           </form>

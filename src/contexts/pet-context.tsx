@@ -29,13 +29,15 @@ interface petData {
     petBreed: string,
     petAge: string,
     petOwnerId: number,
-    petGender: string
+    petGender: string,
+    petProfilePhoto: string
   ) => void;
   handleEditPets: (
     newPetName: string,
     newPetBreed: string,
     newPetAge: string,
-    newPetOwnerId: number
+    newPetOwnerId: number,
+    newpetProfilePhoto: string
   ) => void;
   handlePetToBeUpdated: (value: number | undefined) => void;
   petToBeUpdated?: number;
@@ -61,7 +63,7 @@ export function PetProvider({ children }: PetProps) {
   const { clients, handlePetsBelongedToClient } = useContext(ClientContext);
   const [petToBeUpdated, setPetToBeUpdated] = useState<number | undefined>(0);
   const [petTreatmentState, setPetTreatmentState] = useState(false);
-  const [petProfilePhoto, setPetProfilePhoto] = useState(pet);
+  const [petIcon, setPetIcon] = useState(pet);
   const [searchedPets, setSearchedPets] = useState("");
   const [filteredPets, setFilteredPets] = useState<any>();
   const [deletePetAction, setDeletePetAction] = useState<boolean | undefined>();
@@ -103,13 +105,16 @@ export function PetProvider({ children }: PetProps) {
     petBreed: string,
     petAge: string,
     petOwnerId: number,
-    petGender: string
+    petGender: string,
+    petProfilePhoto: string
   ) {
     let petOwner = clients?.map((clientItem) => {
       if (clientItem?.clientId == petOwnerId) {
         return clientItem?.clientName;
       }
     });
+
+    console.log(petOwner?.length);
 
     setPets([
       ...pets,
@@ -119,12 +124,14 @@ export function PetProvider({ children }: PetProps) {
         petGender,
         petAge,
         petOwnerId,
-        petOwnerName: petOwner,
+        petOwnerName: petOwner?.length != 0 ? petOwner : ["unknown"],
         petTreatmentState: false,
         petLeftAt: "entry not checked",
         petLeaveAt: "entry not checked",
         petId: Math.round(Math.random() * 1e9),
-        petProfilePhoto,
+        petProfilePhoto: petProfilePhoto
+          ? `https://drive.google.com/uc?id=${petProfilePhoto}`
+          : petIcon,
       },
     ]);
   }
@@ -133,7 +140,8 @@ export function PetProvider({ children }: PetProps) {
     newPetName: string,
     newPetBreed: string,
     newPetAge: string,
-    newPetOwnerId: number
+    newPetOwnerId: number,
+    newpetProfilePhoto: string
   ) {
     setPets(
       pets.map((item) => {
@@ -144,6 +152,7 @@ export function PetProvider({ children }: PetProps) {
             petBreed: newPetBreed,
             petAge: newPetAge,
             petOwnerId: newPetOwnerId,
+            petProfilePhoto: newpetProfilePhoto,
           };
         }
         return item;

@@ -1,5 +1,6 @@
 import { FileArrowUp, XCircle } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
+import useDrivePicker from "react-google-drive-picker";
 import { useForm } from "react-hook-form";
 import { PetContext } from "../../contexts/pet-context";
 
@@ -12,6 +13,36 @@ export function PetComponentEditPet({
 }: PetEditComponentProps) {
   const { handleEditPets, pets, petToBeUpdated } = useContext(PetContext);
   const [petSelected, setPetSelected] = useState<any>();
+  const [openPicker, data] = useDrivePicker();
+  const [petProfilePhoto, setPetProfilePhoto] = useState<string>("");
+
+  function handleProfilePhoto() {
+    const handleOpenPicker = () => {
+      openPicker({
+        clientId:
+          "285393898991-r81lciffuskvkasb7gackrv946pc8dho.apps.googleusercontent.com",
+        developerKey: "AIzaSyDqxmzYfCBtHR2EEK45f-sMtzkAa0e6xfY",
+        viewId: "DOCS",
+        showUploadView: true,
+        token:
+          "ya29.a0AVvZVsrr25_l8eyJZj0oDWtL3qPol0ZrPKJC1WwEw2FXvWo_Tp5szV72eoLQku6Rt72d1ATHRsrTpIkFK6xT4rCQXNqkw6xAxqtLQTqVxaoW0Pz3jVyU6a2Koeg2wV3I7MV2ErqjOKDluM3_VihEsCYJ6owhaCgYKAWESARESFQGbdwaI_nN89_XsthDbsA1F5Hsyxg0163",
+        showUploadFolders: true,
+        supportDrives: true,
+        multiselect: true,
+        callbackFunction: (data) => {
+          if (data.action === "cancel") {
+            console.log("User clicked cancel/close button");
+          }
+          data.docs?.map((dataItem) => {
+            console.log(dataItem);
+            let imgId = dataItem["id"];
+            setPetProfilePhoto(imgId);
+          });
+        },
+      });
+    };
+    handleOpenPicker();
+  }
   const {
     register,
     handleSubmit,
@@ -23,7 +54,8 @@ export function PetComponentEditPet({
       data.petName || "undefined",
       data.petBreed || "undefined",
       data.petAge || "undefined",
-      data.petOwnerId || 0
+      data.petOwnerId || 0,
+      petProfilePhoto
     );
   };
 
@@ -49,9 +81,13 @@ export function PetComponentEditPet({
               <>
                 <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-slate-200 rounded-xl">
                   <img
-                    className="w-8/12 h-8/12"
+                    className={
+                      petItem["petProfilePhoto"] == "/src/assets/dog-track.png"
+                        ? "w-7/12 h-7/12"
+                        : "w-full h-full rounded-xl"
+                    }
                     src={petItem["petProfilePhoto"]}
-                    alt="pet icon"
+                    alt="pet image or icon"
                   />
                 </div>
                 <div className="space-y-3">
@@ -74,28 +110,12 @@ export function PetComponentEditPet({
                   <div>
                     <p className="text-main lg:flex md:flex sm:flex">
                       {petItem["petTreatmentState"]
-                        ? "Left at" +
-                          " " +
-                          String(new Date(petItem["petLeftAt"]).getHours()) +
-                          "h" +
-                          " " +
-                          "and" +
-                          " " +
-                          String(new Date(petItem["petLeftAt"]).getMinutes()) +
-                          "min"
+                        ? "Left at " + petItem["petLeftAt"]
                         : petItem["petLeftAt"]}
                     </p>
                     <p className="text-white lg:flex md:flex sm:flex">
                       {petItem["petTreatmentState"]
-                        ? "Leave at" +
-                          " " +
-                          String(new Date(petItem["petLeaveAt"]).getHours()) +
-                          "h" +
-                          " " +
-                          "and" +
-                          " " +
-                          String(new Date(petItem["petLeaveAt"]).getMinutes()) +
-                          "min"
+                        ? "Leave at " + petItem["petLeaveAt"]
                         : petItem["petLeaveAt"]}
                     </p>
                   </div>
@@ -201,6 +221,14 @@ export function PetComponentEditPet({
                   <p className="text-button text-sm">
                     {String(errors.petOwnerId?.message || "")}
                   </p>
+                </div>
+                <div className="space-y-3">
+                  <div
+                    onClick={handleProfilePhoto}
+                    className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
+                  >
+                    Upload photo's cat
+                  </div>
                 </div>
               </div>
             </div>
