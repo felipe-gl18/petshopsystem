@@ -1,6 +1,5 @@
-import { FileArrowUp, XCircle } from "phosphor-react";
-import { FormEvent, useContext, useEffect, useState } from "react";
-import useDrivePicker from "react-google-drive-picker";
+import { XCircle } from "phosphor-react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { PetContext } from "../../contexts/pet-context";
 
@@ -13,36 +12,7 @@ export function PetComponentEditPet({
 }: PetEditComponentProps) {
   const { handleEditPets, pets, petToBeUpdated } = useContext(PetContext);
   const [petSelected, setPetSelected] = useState<any>();
-  const [openPicker, data] = useDrivePicker();
-  const [petProfilePhoto, setPetProfilePhoto] = useState<string>("");
 
-  function handleProfilePhoto() {
-    const handleOpenPicker = () => {
-      openPicker({
-        clientId:
-          "285393898991-r81lciffuskvkasb7gackrv946pc8dho.apps.googleusercontent.com",
-        developerKey: "AIzaSyDqxmzYfCBtHR2EEK45f-sMtzkAa0e6xfY",
-        viewId: "DOCS",
-        showUploadView: true,
-        token:
-          "ya29.a0AVvZVsrr25_l8eyJZj0oDWtL3qPol0ZrPKJC1WwEw2FXvWo_Tp5szV72eoLQku6Rt72d1ATHRsrTpIkFK6xT4rCQXNqkw6xAxqtLQTqVxaoW0Pz3jVyU6a2Koeg2wV3I7MV2ErqjOKDluM3_VihEsCYJ6owhaCgYKAWESARESFQGbdwaI_nN89_XsthDbsA1F5Hsyxg0163",
-        showUploadFolders: true,
-        supportDrives: true,
-        multiselect: true,
-        callbackFunction: (data) => {
-          if (data.action === "cancel") {
-            console.log("User clicked cancel/close button");
-          }
-          data.docs?.map((dataItem) => {
-            console.log(dataItem);
-            let imgId = dataItem["id"];
-            setPetProfilePhoto(imgId);
-          });
-        },
-      });
-    };
-    handleOpenPicker();
-  }
   const {
     register,
     handleSubmit,
@@ -55,7 +25,7 @@ export function PetComponentEditPet({
       data.petBreed || "undefined",
       data.petAge || "undefined",
       data.petOwnerId || 0,
-      petProfilePhoto
+      data.petGender || "undefined"
     );
   };
 
@@ -126,7 +96,7 @@ export function PetComponentEditPet({
         </div>
         <div className="space-y-8 py-9">
           <form onSubmit={handleSubmit(onsubmit)}>
-            <div className="flex lg:space-x-32 md:space-x-32 sm:space-x-7 space-x-7">
+            <div className="flex max-[400px]:flex-col lg:space-x-32 md:space-x-32 sm:space-x-7 space-x-7 max-[400px]:space-x-0">
               <div className="space-y-6">
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Pet name</p>
@@ -201,7 +171,7 @@ export function PetComponentEditPet({
               <div className="space-y-6">
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Owner id</p>
-                  <div className="lg:w-36 md:w-36 sm:w-24 w-20 h-9 flex border-0 bg-main bg-opacity-30 items-center px-6 space-x-4 rounded-md">
+                  <div className="lg:w-36 md:w-36 sm:w-24 w-20 max-[400px]:w-36 h-9 flex border-0 bg-main bg-opacity-30 items-center px-6 space-x-4 rounded-md">
                     <input
                       {...register("petOwnerId", {
                         required: "This is required",
@@ -223,16 +193,26 @@ export function PetComponentEditPet({
                   </p>
                 </div>
                 <div className="space-y-3">
-                  <div
-                    onClick={handleProfilePhoto}
-                    className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
-                  >
-                    Upload photo's cat
+                  <p className="text-main font-extrabold">Gender</p>
+                  <div className="lg:w-36 md:w-36 sm:w-24 w-20 max-[400px]:w-36 h-9 flex border-0 bg-main bg-opacity-30 items-center pl-6 space-x-4 rounded-md">
+                    <select
+                      {...register("petGender", {
+                        required: "This is required",
+                      })}
+                      className="outline-0 w-3/4 bg-transparent font-bold text-main placeholder:text-main"
+                      placeholder="eg: Angorá"
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
                   </div>
+                  <p className="text-button text-sm">
+                    {String(errors.petGender?.message || "")}
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end pr-9">
+            <div className="flex justify-end pr-9 py-4">
               <input
                 type="submit"
                 className="flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full"

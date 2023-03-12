@@ -36,8 +36,8 @@ interface petData {
     newPetName: string,
     newPetBreed: string,
     newPetAge: string,
-    newPetOwnerId: number,
-    newpetProfilePhoto: string
+    newPetGender: string,
+    newPetOwnerId: number
   ) => void;
   handlePetToBeUpdated: (value: number | undefined) => void;
   petToBeUpdated?: number;
@@ -140,8 +140,8 @@ export function PetProvider({ children }: PetProps) {
     newPetName: string,
     newPetBreed: string,
     newPetAge: string,
-    newPetOwnerId: number,
-    newpetProfilePhoto: string
+    newPetGender: string,
+    newPetOwnerId: number
   ) {
     setPets(
       pets.map((item) => {
@@ -152,7 +152,7 @@ export function PetProvider({ children }: PetProps) {
             petBreed: newPetBreed,
             petAge: newPetAge,
             petOwnerId: newPetOwnerId,
-            petProfilePhoto: newpetProfilePhoto,
+            petGender: newPetGender,
           };
         }
         return item;

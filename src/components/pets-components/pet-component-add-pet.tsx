@@ -24,7 +24,7 @@ export function PetComponentAddPet({
         viewId: "DOCS",
         showUploadView: true,
         token:
-          "ya29.a0AVvZVsrPdE_709p5HbvOAaPHAzC6ZXc3X5RTtpBSdQZQtl_y-vVRC4lEAo-zFegxfnK1MckK8fetS_UE11eVBBUJ4Y2r1HZmCWtSVs_qXbx-014QSKhLZObKK8p34lhQN3NknJHfAgwzlIG2utNrck7t3zT7aCgYKAYMSARESFQGbdwaINwqwNvCJtx-G7rAJsT4Orw0163",
+          "ya29.a0AVvZVsoKnSJ2tzAU_nvWYBvARPs2QrN4qBctS0V_r8fOauO9K24xuX3DPe77K_3mrxb2DfCP87Aipk98BmyZegrPbAJ-3B6V4CLjFag8AM1xP7zu6cMKm8pHaldcKbYoCH9atUVQFFDFpD8OlLGV43TMDG8vaCgYKAY0SARESFQGbdwaI1AGdLSN6wrBU16G8oAi2GA0163",
         showUploadFolders: true,
         supportDrives: true,
         multiselect: true,
