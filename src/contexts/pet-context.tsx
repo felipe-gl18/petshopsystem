@@ -29,8 +29,7 @@ interface petData {
     petBreed: string,
     petAge: string,
     petOwnerId: number,
-    petGender: string,
-    petProfilePhoto: string
+    petGender: string
   ) => void;
   handleEditPets: (
     newPetName: string,
@@ -87,7 +86,7 @@ export function PetProvider({ children }: PetProps) {
       localStorage.setItem("pets", JSON.stringify(seila));
       return seila;
     } else {
-      let petsLocal = JSON.parse(localStorage.getItem("pets") || "[{}]");
+      let petsLocal = JSON.parse(localStorage.getItem("pets")!);
       return petsLocal;
     }
   });
@@ -105,8 +104,7 @@ export function PetProvider({ children }: PetProps) {
     petBreed: string,
     petAge: string,
     petOwnerId: number,
-    petGender: string,
-    petProfilePhoto: string
+    petGender: string
   ) {
     let petOwner = clients?.map((clientItem) => {
       if (clientItem?.clientId == petOwnerId) {
@@ -129,9 +127,7 @@ export function PetProvider({ children }: PetProps) {
         petLeftAt: "entry not checked",
         petLeaveAt: "entry not checked",
         petId: Math.round(Math.random() * 1e9),
-        petProfilePhoto: petProfilePhoto
-          ? `https://drive.google.com/uc?id=${petProfilePhoto}`
-          : petIcon,
+        petProfilePhoto: petIcon,
       },
     ]);
   }

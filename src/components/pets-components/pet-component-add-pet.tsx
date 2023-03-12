@@ -2,7 +2,6 @@ import { Cat, FileArrowUp, Key, XCircle } from "phosphor-react";
 import { FormEvent, useContext, useState } from "react";
 import { PetContext } from "../../contexts/pet-context";
 import { useForm } from "react-hook-form";
-import useDrivePicker from "react-google-drive-picker";
 
 interface PetComponentAddPetProps {
   addPetComponentState: () => void;
@@ -12,36 +11,6 @@ export function PetComponentAddPet({
   addPetComponentState,
 }: PetComponentAddPetProps) {
   const { handlePets } = useContext(PetContext);
-  const [openPicker, data] = useDrivePicker();
-  const [petProfilePhoto, setPetProfilePhoto] = useState<string>("");
-
-  function handleProfilePhoto() {
-    const handleOpenPicker = () => {
-      openPicker({
-        clientId:
-          "285393898991-r81lciffuskvkasb7gackrv946pc8dho.apps.googleusercontent.com",
-        developerKey: "AIzaSyDqxmzYfCBtHR2EEK45f-sMtzkAa0e6xfY",
-        viewId: "DOCS",
-        showUploadView: true,
-        token:
-          "ya29.a0AVvZVsoKnSJ2tzAU_nvWYBvARPs2QrN4qBctS0V_r8fOauO9K24xuX3DPe77K_3mrxb2DfCP87Aipk98BmyZegrPbAJ-3B6V4CLjFag8AM1xP7zu6cMKm8pHaldcKbYoCH9atUVQFFDFpD8OlLGV43TMDG8vaCgYKAY0SARESFQGbdwaI1AGdLSN6wrBU16G8oAi2GA0163",
-        showUploadFolders: true,
-        supportDrives: true,
-        multiselect: true,
-        callbackFunction: (data) => {
-          if (data.action === "cancel") {
-            console.log("User clicked cancel/close button");
-          }
-          data.docs?.map((dataItem) => {
-            console.log(dataItem);
-            let imgId = dataItem["id"];
-            setPetProfilePhoto(imgId);
-          });
-        },
-      });
-    };
-    handleOpenPicker();
-  }
 
   const {
     register,
@@ -57,8 +26,7 @@ export function PetComponentAddPet({
       data.petBreed,
       data.petAge,
       data.petOwnerId,
-      data.petGender,
-      petProfilePhoto
+      data.petGender
     );
   };
 
@@ -189,10 +157,7 @@ export function PetComponentAddPet({
                   </p>
                 </div>
                 <div className="space-y-3">
-                  <div
-                    onClick={handleProfilePhoto}
-                    className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
-                  >
+                  <div className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer">
                     Upload photo's cat
                   </div>
                 </div>

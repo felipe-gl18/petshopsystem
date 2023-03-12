@@ -125,7 +125,7 @@ export function ClientProvider({ children }: ClientProps) {
       localStorage.setItem("clients", JSON.stringify(seila));
       return seila;
     } else {
-      let clientsLocal = JSON.parse(localStorage.getItem("clients") || "[{}]");
+      let clientsLocal = JSON.parse(localStorage.getItem("clients")!);
       return clientsLocal;
     }
   });
