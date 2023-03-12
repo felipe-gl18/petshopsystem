@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { ClientContext } from "./clients-context";
+import { MainContext } from "./main-context";
 
 import pet from "/src/assets/dog-track.png";
 
@@ -15,7 +16,7 @@ interface petData {
     petBreed: string;
     petAge: string;
     petOwnerId: number;
-    petOwnerName: Array<string | undefined> | undefined;
+    petOwnerName: any;
     petLeftAt: string;
     petLeaveAt: number | string;
     petId: number;
@@ -59,6 +60,7 @@ export const PetContext = createContext<petData>({
 });
 
 export function PetProvider({ children }: PetProps) {
+  const { fileId, handleFileId } = useContext(MainContext);
   const { clients, handlePetsBelongedToClient } = useContext(ClientContext);
   const [petToBeUpdated, setPetToBeUpdated] = useState<number | undefined>(0);
   const [petTreatmentState, setPetTreatmentState] = useState(false);
@@ -72,7 +74,7 @@ export function PetProvider({ children }: PetProps) {
       petBreed: string;
       petAge: string;
       petOwnerId: number;
-      petOwnerName: Array<string | undefined> | undefined;
+      petOwnerName: any;
       petId: number;
       petLeftAt: string;
       petLeaveAt: number | string;
@@ -106,13 +108,11 @@ export function PetProvider({ children }: PetProps) {
     petOwnerId: number,
     petGender: string
   ) {
-    let petOwner = clients?.map((clientItem) => {
-      if (clientItem?.clientId == petOwnerId) {
-        return clientItem?.clientName;
-      }
-    });
-
-    console.log(petOwner?.length);
+    let petOwner: any = clients
+      ?.filter((clientItem) => clientItem["clientId"] == petOwnerId)
+      .map((item) => {
+        return item["clientName"];
+      });
 
     setPets([
       ...pets,
@@ -122,14 +122,17 @@ export function PetProvider({ children }: PetProps) {
         petGender,
         petAge,
         petOwnerId,
-        petOwnerName: petOwner?.length != 0 ? petOwner : ["unknown"],
+        petOwnerName: petOwner ? String(petOwner) : "unknown",
         petTreatmentState: false,
         petLeftAt: "entry not checked",
         petLeaveAt: "entry not checked",
         petId: Math.round(Math.random() * 1e9),
-        petProfilePhoto: petIcon,
+        petProfilePhoto: fileId
+          ? `https://drive.google.com/uc?export=view&id=${fileId}`
+          : petIcon,
       },
     ]);
+    handleFileId("");
   }
 
   function handleEditPets(
@@ -149,11 +152,15 @@ export function PetProvider({ children }: PetProps) {
             petAge: newPetAge,
             petOwnerId: newPetOwnerId,
             petGender: newPetGender,
+            petProfilePhoto: fileId
+              ? `https://drive.google.com/uc?export=view&id=${fileId}`
+              : petIcon,
           };
         }
         return item;
       })
     );
+    handleFileId("");
   }
 
   function handleDeletePets(value?: boolean) {

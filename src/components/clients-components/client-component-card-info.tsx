@@ -30,7 +30,12 @@ export function ClientComponentCardInfo({
                 <div className="flex space-x-6 max-[470px]:flex-col max-[470px]:space-x-0 max-[470px]:space-y-6 mt-6">
                   <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-52 w-52 lg:h-52 md:h-52 sm:h-52 h-52 bg-slate-200 rounded-xl">
                     <img
-                      className="w-10/12 h-10/12"
+                      className={
+                        clientItem["clientProfilePhoto"] ==
+                        "/src/assets/user.png"
+                          ? "w-7/12 h-7/12"
+                          : "w-full h-full rounded-xl"
+                      }
                       src={clientItem["clientProfilePhoto"]}
                       alt="client icon"
                     />

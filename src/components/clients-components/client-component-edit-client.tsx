@@ -10,6 +10,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { ClientContext } from "../../contexts/clients-context";
 import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
+import { MainContext } from "../../contexts/main-context";
 
 interface ClientEditComponentProps {
   editClientComponentState: (e?: number | undefined) => void;
@@ -18,6 +19,7 @@ interface ClientEditComponentProps {
 export function ClientComponentEditClient({
   editClientComponentState,
 }: ClientEditComponentProps) {
+  const { handleOpenPicker } = useContext(MainContext);
   const { handleEditClients, clientToBeUpdated, clients } =
     useContext(ClientContext);
   const [clientSelected, setclientSelected] = useState<any>();
@@ -61,7 +63,11 @@ export function ClientComponentEditClient({
               <>
                 <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-slate-200 rounded-xl">
                   <img
-                    className="w-10/12 h-10/12"
+                    className={
+                      clientItem["clientProfilePhoto"] == "/src/assets/user.png"
+                        ? "w-7/12 h-7/12"
+                        : "w-full h-full rounded-xl"
+                    }
                     src={clientItem["clientProfilePhoto"]}
                     alt="client icon"
                   />
@@ -185,6 +191,14 @@ export function ClientComponentEditClient({
                   <p className="text-button text-sm">
                     {String(errors.clientAddress?.message || "")}
                   </p>
+                </div>
+                <div className="space-y-3">
+                  <div
+                    onClick={handleOpenPicker}
+                    className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
+                  >
+                    Upload photo's cat
+                  </div>
                 </div>
               </div>
             </div>

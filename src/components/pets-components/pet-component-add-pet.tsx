@@ -2,6 +2,7 @@ import { Cat, FileArrowUp, Key, XCircle } from "phosphor-react";
 import { FormEvent, useContext, useState } from "react";
 import { PetContext } from "../../contexts/pet-context";
 import { useForm } from "react-hook-form";
+import { MainContext } from "../../contexts/main-context";
 
 interface PetComponentAddPetProps {
   addPetComponentState: () => void;
@@ -11,6 +12,7 @@ export function PetComponentAddPet({
   addPetComponentState,
 }: PetComponentAddPetProps) {
   const { handlePets } = useContext(PetContext);
+  const { handleOpenPicker, fileId } = useContext(MainContext);
 
   const {
     register,
@@ -18,8 +20,6 @@ export function PetComponentAddPet({
     formState: { errors },
   } = useForm();
   const onsubmit = (data: any) => {
-    console.log("submited");
-
     addPetComponentState();
     handlePets(
       data.petName,
@@ -157,7 +157,10 @@ export function PetComponentAddPet({
                   </p>
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer">
+                  <div
+                    onClick={handleOpenPicker}
+                    className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
+                  >
                     Upload photo's cat
                   </div>
                 </div>

@@ -5,9 +5,10 @@ import {
   useEffect,
   useState,
 } from "react";
+import { MainContext } from "./main-context";
 import { PetContext } from "./pet-context";
 
-import clientImage from "/src/assets/user.png";
+import clientIcon from "/src/assets/user.png";
 
 interface ClientData {
   clients?: Array<{
@@ -70,7 +71,9 @@ export const ClientContext = createContext<ClientData>({
 });
 
 export function ClientProvider({ children }: ClientProps) {
-  const [clientProfilePhoto, setClientProfilePhoto] = useState(clientImage);
+  const { fileId, handleFileId } = useContext(MainContext);
+
+  const [clientProfilePhoto, setClientProfilePhoto] = useState(clientIcon);
   const [searchedClients, setSearchedClients] = useState("");
   const [filterdClients, setFilteredClients] = useState<any>();
   const [clientId, setClientId] = useState(0);
@@ -160,10 +163,13 @@ export function ClientProvider({ children }: ClientProps) {
         clientPhoneNumber,
         clientAddress,
         petsState: false,
-        clientProfilePhoto,
+        clientProfilePhoto: fileId
+          ? `https://drive.google.com/uc?export=view&id=${fileId}`
+          : clientIcon,
         clientId: Math.round(Math.random() * 1e9),
       },
     ]);
+    handleFileId("");
   }
 
   function handleEditClients(
@@ -181,11 +187,15 @@ export function ClientProvider({ children }: ClientProps) {
             clientEmail: newClientEmail || "undefined",
             clientPhoneNumber: newClientPhoneNumber || "undefined",
             clientAddress: newClientAddress || "undefined",
+            clientProfilePhoto: fileId
+              ? `https://drive.google.com/uc?export=view&id=${fileId}`
+              : clientIcon,
           };
         }
         return clientItem;
       })
     );
+    handleFileId("");
   }
 
   function handleDeleteClients(value?: boolean) {

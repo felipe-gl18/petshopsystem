@@ -10,6 +10,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { ClientContext } from "../../contexts/clients-context";
 import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
+import { MainContext } from "../../contexts/main-context";
 
 interface ClientComponentAddClientProps {
   addClientComponentState: () => void;
@@ -18,6 +19,7 @@ interface ClientComponentAddClientProps {
 export function ClientComponentAddClient({
   addClientComponentState,
 }: ClientComponentAddClientProps) {
+  const { fileId, handleOpenPicker } = useContext(MainContext);
   const { handleClients } = useContext(ClientContext);
 
   const {
@@ -147,6 +149,14 @@ export function ClientComponentAddClient({
                 <p className="text-button text-sm">
                   {String(errors.clientPhoneNumber?.message || "")}
                 </p>
+              </div>
+              <div className="space-y-3">
+                <div
+                  onClick={handleOpenPicker}
+                  className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
+                >
+                  Upload photo's cat
+                </div>
               </div>
             </div>
           </div>

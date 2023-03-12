@@ -45,7 +45,11 @@ export function ClientComponentData({
                         handleClientToBeUpdated(data?.clientId);
                         cardInfoClientComponentState();
                       }}
-                      className="w-8/12 h-8/12"
+                      className={
+                        data["clientProfilePhoto"] == "/src/assets/user.png"
+                          ? "w-7/12 h-7/12"
+                          : "w-full h-full rounded-xl"
+                      }
                       src={data["clientProfilePhoto"]}
                       alt="client icon"
                     />
