@@ -79,34 +79,12 @@ export function ClientComponentCardInfo({
                             </p>
                             <p className="text-main">
                               {petItem["petTreatmentState"]
-                                ? "Left at" +
-                                  " " +
-                                  String(
-                                    new Date(petItem["petLeftAt"]).getHours()
-                                  ) +
-                                  "h" +
-                                  " " +
-                                  "and" +
-                                  " " +
-                                  String(
-                                    new Date(petItem["petLeftAt"]).getMinutes()
-                                  ) +
-                                  "min"
+                                ? "Left at " + petItem["petLeftAt"]
                                 : petItem["petLeftAt"]}
                             </p>
                             <p className="text-white">
                               {petItem["petTreatmentState"]
-                                ? "Leave at" +
-                                  " " +
-                                  String(
-                                    new Date(petItem["petLeaveAt"]).getHours()
-                                  ) +
-                                  "h" +
-                                  " " +
-                                  String(
-                                    new Date(petItem["petLeaveAt"]).getMinutes()
-                                  ) +
-                                  "min"
+                                ? "Leave at " + petItem["petLeaveAt"]
                                 : petItem["petLeaveAt"]}
                             </p>
                           </div>
