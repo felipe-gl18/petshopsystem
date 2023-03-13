@@ -122,7 +122,7 @@ export function PetProvider({ children }: PetProps) {
         petGender,
         petAge,
         petOwnerId,
-        petOwnerName: petOwner ? String(petOwner) : "unknown",
+        petOwnerName: petOwner.length != 0 ? String(petOwner) : "unknown",
         petTreatmentState: false,
         petLeftAt: "entry not checked",
         petLeaveAt: "entry not checked",

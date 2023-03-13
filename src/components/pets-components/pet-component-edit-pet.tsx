@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MainContext } from "../../contexts/main-context";
 import { PetContext } from "../../contexts/pet-context";
+import petIcon from "/src/assets/dog-track.png";
 
 interface PetEditComponentProps {
   editPetComponentState: () => void;
@@ -50,11 +51,11 @@ export function PetComponentEditPet({
         <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col lg:items-center space-y-6 lg:space-x-9">
           {petSelected?.map((petItem: any) => {
             return (
-              <>
+              <div key={petItem["petId"]} className="space-y-8">
                 <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-slate-200 rounded-xl">
                   <img
                     className={
-                      petItem["petProfilePhoto"] == "/src/assets/dog-track.png"
+                      petItem["petProfilePhoto"] == petIcon
                         ? "w-7/12 h-7/12"
                         : "w-full h-full rounded-xl"
                     }
@@ -92,13 +93,13 @@ export function PetComponentEditPet({
                     </p>
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
         </div>
         <div className="space-y-8 py-9">
           <form onSubmit={handleSubmit(onsubmit)}>
-            <div className="flex max-[400px]:flex-col lg:space-x-32 md:space-x-32 sm:space-x-7 space-x-7 max-[400px]:space-x-0">
+            <div className="flex max-[490px]:flex-col lg:space-x-32 md:space-x-32 sm:space-x-7 space-x-7 max-[490px]:space-x-0">
               <div className="space-y-6">
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Pet name</p>
@@ -173,7 +174,7 @@ export function PetComponentEditPet({
               <div className="space-y-6">
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Owner id</p>
-                  <div className="lg:w-36 md:w-36 sm:w-24 w-20 max-[400px]:w-36 h-9 flex border-0 bg-main bg-opacity-30 items-center px-6 space-x-4 rounded-md">
+                  <div className="lg:w-36 md:w-36 sm:w-24 w-36 max-[400px]:w-36 h-9 flex border-0 bg-main bg-opacity-30 items-center px-6 space-x-4 rounded-md">
                     <input
                       {...register("petOwnerId", {
                         required: "This is required",
@@ -196,7 +197,7 @@ export function PetComponentEditPet({
                 </div>
                 <div className="space-y-3">
                   <p className="text-main font-extrabold">Gender</p>
-                  <div className="lg:w-36 md:w-36 sm:w-24 w-20 max-[400px]:w-36 h-9 flex border-0 bg-main bg-opacity-30 items-center pl-6 space-x-4 rounded-md">
+                  <div className="lg:w-36 md:w-36 sm:w-24 w-36 max-[400px]:w-36 h-9 flex border-0 bg-main bg-opacity-30 items-center pl-6 space-x-4 rounded-md">
                     <select
                       {...register("petGender", {
                         required: "This is required",

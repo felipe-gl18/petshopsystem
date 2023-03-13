@@ -8,6 +8,8 @@ import {
 } from "phosphor-react";
 import { ClientContext } from "../../contexts/clients-context";
 import { PetContext } from "../../contexts/pet-context";
+import petIcon from "/src/assets/dog-track.png";
+import userIcon from "/src/assets/user.png";
 
 interface SearchAndEditProps {
   editClientComponentState: (e?: number | undefined) => void;
@@ -46,7 +48,7 @@ export function ClientComponentData({
                         cardInfoClientComponentState();
                       }}
                       className={
-                        data["clientProfilePhoto"] == "/src/assets/user.png"
+                        data["clientProfilePhoto"] == userIcon
                           ? "w-7/12 h-7/12"
                           : "w-full h-full rounded-xl"
                       }
@@ -115,8 +117,7 @@ export function ClientComponentData({
                             <div className="flex items-center justify-center w-44 h-44 bg-slate-200 bg-opacity-60 rounded-xl">
                               <img
                                 className={
-                                  petItem["petProfilePhoto"] ==
-                                  "/src/assets/dog-track.png"
+                                  petItem["petProfilePhoto"] == petIcon
                                     ? "w-7/12 h-7/12"
                                     : "w-full h-full rounded-xl"
                                 }

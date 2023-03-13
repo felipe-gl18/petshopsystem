@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { ClientContext } from "../../contexts/clients-context";
+import petIcon from "/src/assets/dog-track.png";
+import userIcon from "/src/assets/user.png";
 
 interface ClientCardInfoComponentProps {
   cardInfoClientComponentState: () => void;
@@ -31,8 +33,7 @@ export function ClientComponentCardInfo({
                   <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-52 w-52 lg:h-52 md:h-52 sm:h-52 h-52 bg-slate-200 rounded-xl">
                     <img
                       className={
-                        clientItem["clientProfilePhoto"] ==
-                        "/src/assets/user.png"
+                        clientItem["clientProfilePhoto"] == userIcon
                           ? "w-7/12 h-7/12"
                           : "w-full h-full rounded-xl"
                       }
@@ -63,8 +64,7 @@ export function ClientComponentCardInfo({
                         <div className="flex items-center justify-center w-44 h-44 bg-slate-200 rounded-xl">
                           <img
                             className={
-                              petItem["petProfilePhoto"] ==
-                              "/src/assets/dog-track.png"
+                              petItem["petProfilePhoto"] == petIcon
                                 ? "w-7/12 h-7/12"
                                 : "w-full h-full rounded-xl"
                             }

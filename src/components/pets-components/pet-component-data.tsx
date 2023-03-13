@@ -8,6 +8,7 @@ import {
 } from "phosphor-react";
 import { useContext } from "react";
 import { PetContext } from "../../contexts/pet-context";
+import petIcon from "/src/assets/dog-track.png";
 
 interface PetMainProps {
   editPetComponentState: () => void;
@@ -32,7 +33,7 @@ export function PetComponentData({ editPetComponentState }: PetMainProps) {
                   <div className="flex items-center justify-center w-48 lg:w-44 md:w-56 sm:w-56 h-48 lg:h-44 md:h-56 sm:h-56 bg-slate-200 rounded-xl">
                     <img
                       className={
-                        data["petProfilePhoto"] == "/src/assets/dog-track.png"
+                        data["petProfilePhoto"] == petIcon
                           ? "w-7/12 h-7/12"
                           : "w-full h-full rounded-xl"
                       }
