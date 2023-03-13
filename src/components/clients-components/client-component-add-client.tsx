@@ -155,7 +155,7 @@ export function ClientComponentAddClient({
                   onClick={handleOpenPicker}
                   className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
                 >
-                  Upload photo's cat
+                  Upload photo's client
                 </div>
               </div>
             </div>

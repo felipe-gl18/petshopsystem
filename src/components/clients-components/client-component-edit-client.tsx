@@ -197,12 +197,12 @@ export function ClientComponentEditClient({
                     onClick={handleOpenPicker}
                     className="flex items-center justify-center w-48 h-9 text-sm font-bold bg-main rounded-full mt-12 cursor-pointer"
                   >
-                    Upload photo's cat
+                    Upload photo's client
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end pr-9">
+            <div className="flex justify-end pr-9 pt-8 max-[400px]:pt-14">
               <input
                 type="submit"
                 className={`flex items-center justify-center w-40 h-10 text-lg font-bold bg-button rounded-full`}

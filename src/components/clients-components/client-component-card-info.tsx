@@ -62,7 +62,12 @@ export function ClientComponentCardInfo({
                       <div className="flex lg:flex-row md:flex-row sm:flex-col flex-col lg:space-x-6 md:space-x-6 lg:space-y-0 md:space-y-0 sm:space-y-6 space-y-6">
                         <div className="flex items-center justify-center w-44 h-44 bg-slate-200 rounded-xl">
                           <img
-                            className="w-8/12 h-8/12"
+                            className={
+                              petItem["petProfilePhoto"] ==
+                              "/src/assets/dog-track.png"
+                                ? "w-7/12 h-7/12"
+                                : "w-full h-full rounded-xl"
+                            }
                             src={petItem["petProfilePhoto"]}
                             alt="pet icon"
                           />

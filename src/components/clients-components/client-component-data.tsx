@@ -114,7 +114,12 @@ export function ClientComponentData({
                           >
                             <div className="flex items-center justify-center w-44 h-44 bg-slate-200 bg-opacity-60 rounded-xl">
                               <img
-                                className="w-8/12 h-8/12"
+                                className={
+                                  petItem["petProfilePhoto"] ==
+                                  "/src/assets/dog-track.png"
+                                    ? "w-7/12 h-7/12"
+                                    : "w-full h-full rounded-xl"
+                                }
                                 src={petItem["petProfilePhoto"]}
                                 alt="pet icon"
                               />
