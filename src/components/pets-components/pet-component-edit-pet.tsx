@@ -27,8 +27,8 @@ export function PetComponentEditPet({
       data.petName || "undefined",
       data.petBreed || "undefined",
       data.petAge || "undefined",
-      data.petOwnerId || 0,
-      data.petGender || "undefined"
+      data.petGender || "undefined",
+      data.petOwnerId || 0
     );
   };
 

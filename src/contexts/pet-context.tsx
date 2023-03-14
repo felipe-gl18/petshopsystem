@@ -142,6 +142,13 @@ export function PetProvider({ children }: PetProps) {
     newPetGender: string,
     newPetOwnerId: number
   ) {
+    console.log(newPetOwnerId);
+    let newPetOwner: any = clients
+      ?.filter((clientItem) => clientItem["clientId"] == newPetOwnerId)
+      .map((item) => {
+        return item["clientName"];
+      });
+
     setPets(
       pets.map((item) => {
         if (item.petId == petToBeUpdated) {
@@ -151,10 +158,11 @@ export function PetProvider({ children }: PetProps) {
             petBreed: newPetBreed,
             petAge: newPetAge,
             petOwnerId: newPetOwnerId,
+            petOwnerName: newPetOwner,
             petGender: newPetGender,
             petProfilePhoto: fileId
               ? `https://drive.google.com/uc?export=view&id=${fileId}`
-              : petIcon,
+              : item.petProfilePhoto,
           };
         }
         return item;
