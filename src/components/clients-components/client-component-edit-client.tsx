@@ -73,7 +73,7 @@ export function ClientComponentEditClient({
                   />
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-center space-x-4">
+                  <div className="flex max-[360px]:flex-col items-center max-[360px]:items-start space-x-4 max-[360px]:space-x-0">
                     <p className="lg:text-3xl md:text-3xl sm:text-xl text-lg text-main font-black">
                       {clientItem["clientName"]}
                     </p>

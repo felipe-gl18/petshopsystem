@@ -189,7 +189,7 @@ export function ClientProvider({ children }: ClientProps) {
             clientAddress: newClientAddress || "undefined",
             clientProfilePhoto: fileId
               ? `https://drive.google.com/uc?export=view&id=${fileId}`
-              : clientIcon,
+              : clientItem["clientProfilePhoto"],
           };
         }
         return clientItem;

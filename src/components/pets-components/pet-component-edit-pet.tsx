@@ -51,7 +51,10 @@ export function PetComponentEditPet({
         <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col lg:items-center space-y-6 lg:space-x-9">
           {petSelected?.map((petItem: any) => {
             return (
-              <div key={petItem["petId"]} className="space-y-8">
+              <div
+                key={petItem["petId"]}
+                className="flex space-y-8 space-x-8 max-[490px]:flex-col max-[490px]:space-x-0"
+              >
                 <div className="flex items-center justify-center lg:w-52 md:w-52 sm:w-44 w-44 lg:h-52 md:h-52 sm:h-44 h-44 bg-slate-200 rounded-xl">
                   <img
                     className={
