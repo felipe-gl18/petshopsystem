@@ -32,6 +32,8 @@ export function MainProvider({ children }: MainProps) {
       developerKey: "AIzaSyDqxmzYfCBtHR2EEK45f-sMtzkAa0e6xfY",
       viewId: "DOCS",
       // token: token, // pass oauth token in case you already have one
+      token:
+        "ya29.a0AVvZVsr6cepF5sid-mwegj95sOxDy7w5ejlmHUy5qrqZyD01eG0Bq2fhlFHjL0ov8qZmwEnr_DpOYRLsYzh2niPYyaoxfUyRxVFFVEdG1CNxxgnljIXjwq_-NZfxhqpueSx5nmo6drfTQc3RQWb3uv_EP3_6aCgYKAdwSARESFQGbdwaIu0uuI2R2dp1fnmigeSs4QQ0163",
       showUploadView: true,
       showUploadFolders: true,
       supportDrives: true,
