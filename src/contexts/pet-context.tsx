@@ -158,7 +158,9 @@ export function PetProvider({ children }: PetProps) {
             petBreed: newPetBreed,
             petAge: newPetAge,
             petOwnerId: newPetOwnerId,
-            petOwnerName: newPetOwner,
+            petOwnerName:
+              newPetOwner.length != 0 ? String(newPetOwner) : "unknown",
+
             petGender: newPetGender,
             petProfilePhoto: fileId
               ? `https://drive.google.com/uc?export=view&id=${fileId}`
